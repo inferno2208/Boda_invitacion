@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciarCountdown();
   iniciarRsvp();
   iniciarGaleria();
-  iniciarScrollAnimations();
   iniciarScrollArrow();
 });
 

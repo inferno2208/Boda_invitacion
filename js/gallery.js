@@ -1,16 +1,24 @@
 /**
- * gallery.js — Galería con lightbox usando <dialog> nativo
+ * gallery.js — Carrusel horizontal fluido y visor modal continuo a pantalla completa
  *
- * - Abre un lightbox al hacer clic en una imagen
- * - Navegación con flechas (anterior/siguiente)
- * - Cierre con botón X, tecla Escape (nativo de <dialog>), o clic en backdrop
- * - Navegación con teclado (flechas izquierda/derecha)
- * - Navegación táctil con swipe (izquierda/derecha) para móviles
- * - Transición de fade al cambiar imágenes
- * - Sin dependencias externas
+ * Características:
+ * 1. Carrusel en sección principal:
+ *    - Desplazamiento horizontal con scroll-snap nativo y scroll suave
+ *    - Flechas de navegación previa y siguiente
+ *    - Paginación interactiva por puntos (dots) sincronizada en tiempo real
+ *    - Sincronización con scroll event y scrollsnapchange
+ * 2. Visor centrado a pantalla completa (Lightbox):
+ *    - Utiliza elemento <dialog> nativo con backdrop-filter blur de alta gama
+ *    - Centrado perfecto de la imagen hasta 90vw / 85vh con object-fit contain
+ *    - Navegación continua cíclica (1 a 8 y vuelve a 1)
+ *    - Contador numérico superior sincronizado ("X / 8")
+ *    - Botones integrados anterior y siguiente en el visor
+ *    - Navegación por teclado (ArrowLeft, ArrowRight, Escape)
+ *    - Gestos táctiles móviles (swipe horizontal con umbral dinámico)
+ *    - Transición fluida con fade & scale
  */
 
-/** Índice de la imagen actualmente mostrada en el lightbox */
+/** Índice de la imagen actualmente activa */
 let indiceActual = 0;
 
 /** @type {HTMLDialogElement|null} */
@@ -19,140 +27,322 @@ let dialogEl = null;
 /** @type {HTMLImageElement|null} */
 let imagenLightbox = null;
 
-/** @type {string[]} Lista de URLs de las imágenes */
+/** @type {HTMLElement|null} */
+let contadorLightbox = null;
+
+/** @type {HTMLElement|null} */
+let carruselTrack = null;
+
+/** @type {NodeListOf<HTMLButtonElement>|null} */
+let dotsPaginacion = null;
+
+/** @type {NodeListOf<HTMLElement>|null} */
+let slidesCarrusel = null;
+
+/** Lista estructurada de datos de imágenes */
 let listaImagenes = [];
 
-/** Coordenadas del toque inicial para detección de swipe */
+/** Coordenadas táctiles para detección de swipe */
 let touchStartX = 0;
 let touchStartY = 0;
+const SWIPE_THRESHOLD = 40;
 
-/** Umbral mínimo en px para considerar un gesto como swipe */
-const SWIPE_THRESHOLD = 50;
+/** Bandera para evitar llamadas duplicadas en scroll */
+let tickScroll = false;
 
 /**
- * Inicializa la galería y el lightbox.
+ * Inicializa el carrusel y el lightbox.
  */
 function iniciarGaleria() {
-  const grid = document.getElementById('galeria-grid');
+  carruselTrack = document.getElementById('galeria-carrusel');
   dialogEl = document.getElementById('lightbox');
   imagenLightbox = document.getElementById('lightbox-imagen');
+  contadorLightbox = document.getElementById('lightbox-contador');
 
-  if (!grid || !dialogEl || !imagenLightbox) {
-    console.error('[gallery] Faltan elementos del DOM para la galería');
+  if (!carruselTrack || !dialogEl || !imagenLightbox) {
+    console.error('[gallery] Elementos esenciales de la galería no encontrados en el DOM');
     return;
   }
 
-  /* Recoger todas las URLs de las imágenes del grid */
-  const items = grid.querySelectorAll('.galeria__item');
-  listaImagenes = Array.from(items).map((item) => {
-    const img = item.querySelector('img');
-    return img ? img.src : '';
-  }).filter(Boolean);
+  slidesCarrusel = carruselTrack.querySelectorAll('.galeria__slide');
+  dotsPaginacion = document.querySelectorAll('#carrusel-dots .galeria__dot');
 
-  /* Abrir lightbox al hacer clic en una imagen */
-  items.forEach((item, idx) => {
-    item.addEventListener('click', () => abrirLightbox(idx));
-    /* Accesibilidad: también se puede abrir con teclado */
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        abrirLightbox(idx);
-      }
-    });
+  /* Construir lista de imágenes a partir de los slides */
+  listaImagenes = Array.from(slidesCarrusel).map((slide, idx) => {
+    const img = slide.querySelector('img');
+    return {
+      src: img ? img.src : `assets/images/galeria-${idx + 1}.webp`,
+      alt: img ? img.alt : `Louis y Fabiola — Fotografía ${idx + 1}`,
+    };
   });
 
-  /* Botones de navegación */
+  /* 1. CONFIGURACIÓN DEL CARRUSEL EN LA PÁGINA */
+  iniciarControlesCarrusel();
+
+  /* 2. CONFIGURACIÓN DEL VISOR MODAL (LIGHTBOX) */
+  iniciarControlesLightbox();
+}
+
+
+/* ─── 1. LÓGICA DEL CARRUSEL HORIZONTAL ───────────────────── */
+
+/**
+ * Conecta los botones flotantes, los dots de paginación y la sincronización al hacer scroll.
+ */
+function iniciarControlesCarrusel() {
+  const btnPrev = document.getElementById('carrusel-prev');
+  const btnNext = document.getElementById('carrusel-next');
+
+  /* Navegación con flechas flotantes */
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => desplazarCarrusel(-1));
+  }
+  if (btnNext) {
+    btnNext.addEventListener('click', () => desplazarCarrusel(1));
+  }
+
+  /* Clic en los puntos de paginación */
+  if (dotsPaginacion) {
+    dotsPaginacion.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        navegarSlideCarrusel(idx);
+      });
+    });
+  }
+
+  /* Clic o teclado en cada slide para abrir el visor */
+  if (slidesCarrusel) {
+    slidesCarrusel.forEach((slide, idx) => {
+      slide.addEventListener('click', () => abrirLightbox(idx));
+
+      slide.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          abrirLightbox(idx);
+        }
+      });
+    });
+  }
+
+  /* Sincronización del punto activo mediante evento scroll con requestAnimationFrame */
+  carruselTrack.addEventListener('scroll', onCarruselScroll, { passive: true });
+
+  /* Soporte nativo para scrollsnapchange en navegadores modernos */
+  if ('onscrollsnapchange' in HTMLElement.prototype) {
+    carruselTrack.addEventListener('scrollsnapchange', (e) => {
+      const snapTarget = e.snapTargetInline || e.snapTargetBlock;
+      if (snapTarget && slidesCarrusel) {
+        const targetIdx = Array.from(slidesCarrusel).indexOf(snapTarget);
+        if (targetIdx !== -1) {
+          actualizarDotActivo(targetIdx);
+        }
+      }
+    });
+  }
+}
+
+/**
+ * Desplaza el carrusel una cantidad adaptada al tamaño del slide visible.
+ * @param {number} direccion -1 para anterior, 1 para siguiente
+ */
+function desplazarCarrusel(direccion) {
+  if (!carruselTrack || !slidesCarrusel || slidesCarrusel.length === 0) return;
+
+  const anchoSlide = slidesCarrusel[0].offsetWidth;
+  const gap = 24; // 1.5rem
+  const pasoDesplazamiento = (anchoSlide + gap) * direccion;
+
+  carruselTrack.scrollBy({
+    left: pasoDesplazamiento,
+    behavior: 'smooth',
+  });
+}
+
+/**
+ * Lleva la vista del carrusel directamente al slide en el índice especificado.
+ * @param {number} idx
+ */
+function navegarSlideCarrusel(idx) {
+  if (!slidesCarrusel || idx < 0 || idx >= slidesCarrusel.length) return;
+
+  slidesCarrusel[idx].scrollIntoView({
+    behavior: 'smooth',
+    inline: 'center',
+    block: 'nearest',
+  });
+
+  actualizarDotActivo(idx);
+}
+
+/**
+ * Detecta qué slide se encuentra más centrado en el contenedor del carrusel.
+ */
+function onCarruselScroll() {
+  if (tickScroll) return;
+  tickScroll = true;
+
+  requestAnimationFrame(() => {
+    tickScroll = false;
+    if (!carruselTrack || !slidesCarrusel || slidesCarrusel.length === 0) return;
+
+    const trackRect = carruselTrack.getBoundingClientRect();
+    const centroTrack = trackRect.left + trackRect.width / 2;
+
+    let menorDistancia = Infinity;
+    let slideMasCercano = 0;
+
+    slidesCarrusel.forEach((slide, idx) => {
+      const slideRect = slide.getBoundingClientRect();
+      const centroSlide = slideRect.left + slideRect.width / 2;
+      const distancia = Math.abs(centroTrack - centroSlide);
+
+      if (distancia < menorDistancia) {
+        menorDistancia = distancia;
+        slideMasCercano = idx;
+      }
+    });
+
+    actualizarDotActivo(slideMasCercano);
+  });
+}
+
+/**
+ * Actualiza visualmente el dot activo y sus atributos de accesibilidad ARIA.
+ * @param {number} idxActivo
+ */
+function actualizarDotActivo(idxActivo) {
+  if (!dotsPaginacion) return;
+
+  dotsPaginacion.forEach((dot, idx) => {
+    const esActivo = idx === idxActivo;
+    dot.classList.toggle('galeria__dot--activo', esActivo);
+    dot.setAttribute('aria-selected', esActivo ? 'true' : 'false');
+  });
+}
+
+
+/* ─── 2. LÓGICA DEL VISOR MODAL CONTINUO (LIGHTBOX) ───────── */
+
+/**
+ * Conecta botones, teclado, touch swipe y eventos de backdrop del modal.
+ */
+function iniciarControlesLightbox() {
   const btnAnterior = document.getElementById('lightbox-anterior');
   const btnSiguiente = document.getElementById('lightbox-siguiente');
   const btnCerrar = document.getElementById('lightbox-cerrar');
 
-  if (btnAnterior) btnAnterior.addEventListener('click', anteriorImagen);
-  if (btnSiguiente) btnSiguiente.addEventListener('click', siguienteImagen);
+  if (btnAnterior) btnAnterior.addEventListener('click', anteriorFotoModal);
+  if (btnSiguiente) btnSiguiente.addEventListener('click', siguienteFotoModal);
   if (btnCerrar) btnCerrar.addEventListener('click', cerrarLightbox);
 
-  /* Navegación con teclado */
+  /* Navegación por teclado dentro del diálogo */
   dialogEl.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') anteriorImagen();
-    if (e.key === 'ArrowRight') siguienteImagen();
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      anteriorFotoModal();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      siguienteFotoModal();
+    }
   });
 
-  /* Cerrar al hacer clic en el backdrop (fuera del contenido) */
+  /* Restaurar scroll al cerrar el diálogo nativo */
+  dialogEl.addEventListener('close', () => {
+    document.body.style.overflow = '';
+  });
+
+  /* Cerrar al hacer clic en el backdrop oscuro */
   dialogEl.addEventListener('click', (e) => {
     if (e.target === dialogEl) {
       cerrarLightbox();
     }
   });
 
-  /* Gestos táctiles (swipe) para navegación en móviles */
-  dialogEl.addEventListener('touchstart', handleTouchStart, { passive: true });
-  dialogEl.addEventListener('touchend', handleTouchEnd, { passive: true });
+  /* Gestos táctiles para móviles (swipe horizontal) */
+  const swipeArea = document.getElementById('lightbox-swipe-area') || dialogEl;
+  swipeArea.addEventListener('touchstart', handleTouchStart, { passive: true });
+  swipeArea.addEventListener('touchend', handleTouchEnd, { passive: true });
 }
 
-
 /**
- * Abre el lightbox mostrando la imagen en el índice dado.
+ * Abre el lightbox en el índice indicado.
  * @param {number} idx
  */
 function abrirLightbox(idx) {
-  if (!dialogEl || !imagenLightbox) return;
+  if (!dialogEl || !imagenLightbox || listaImagenes.length === 0) return;
   if (idx < 0 || idx >= listaImagenes.length) return;
 
   indiceActual = idx;
-  imagenLightbox.src = listaImagenes[idx];
-  imagenLightbox.alt = `Foto ${idx + 1} de ${listaImagenes.length}`;
+  imagenLightbox.src = listaImagenes[indiceActual].src;
+  imagenLightbox.alt = listaImagenes[indiceActual].alt;
+  actualizarContadorModal();
+
   dialogEl.showModal();
+  document.body.style.overflow = 'hidden';
+
+  /* Asegurar que el carrusel en la página también se sincronice */
+  navegarSlideCarrusel(indiceActual);
 }
 
-
 /**
- * Cierra el lightbox.
+ * Cierra el visor de pantalla completa.
  */
 function cerrarLightbox() {
   if (!dialogEl) return;
   dialogEl.close();
+  document.body.style.overflow = '';
 }
 
-
 /**
- * Muestra la imagen anterior (cíclico) con transición de fade.
+ * Retrocede a la foto anterior con navegación continua cíclica.
  */
-function anteriorImagen() {
+function anteriorFotoModal() {
   if (listaImagenes.length === 0) return;
   indiceActual = (indiceActual - 1 + listaImagenes.length) % listaImagenes.length;
-  actualizarImagenConFade();
+  cambiarFotoConAnimacion();
 }
 
-
 /**
- * Muestra la siguiente imagen (cíclico) con transición de fade.
+ * Avanza a la foto siguiente con navegación continua cíclica.
  */
-function siguienteImagen() {
+function siguienteFotoModal() {
   if (listaImagenes.length === 0) return;
   indiceActual = (indiceActual + 1) % listaImagenes.length;
-  actualizarImagenConFade();
+  cambiarFotoConAnimacion();
 }
 
-
 /**
- * Actualiza la imagen con una transición de fade suave.
+ * Aplica animación fluida de desvanecimiento y escala al cambiar de foto.
  */
-function actualizarImagenConFade() {
+function cambiarFotoConAnimacion() {
   if (!imagenLightbox) return;
 
-  /* Fade out */
+  /* Inicio de transición (fade out & scale down) */
   imagenLightbox.classList.add('lightbox__imagen--fade');
 
-  /* Esperar a que termine el fade out, luego cambiar imagen y fade in */
   setTimeout(() => {
-    imagenLightbox.src = listaImagenes[indiceActual];
-    imagenLightbox.alt = `Foto ${indiceActual + 1} de ${listaImagenes.length}`;
+    imagenLightbox.src = listaImagenes[indiceActual].src;
+    imagenLightbox.alt = listaImagenes[indiceActual].alt;
+    actualizarContadorModal();
+
+    /* Sincronizar carrusel de fondo */
+    navegarSlideCarrusel(indiceActual);
+
+    /* Fin de transición (fade in & scale up) */
     imagenLightbox.classList.remove('lightbox__imagen--fade');
-  }, 200);
+  }, 160);
 }
 
+/**
+ * Actualiza el indicador numérico "X / 8" en la esquina superior del visor.
+ */
+function actualizarContadorModal() {
+  if (!contadorLightbox) return;
+  contadorLightbox.textContent = `${indiceActual + 1} / ${listaImagenes.length}`;
+}
 
 /**
- * Registra las coordenadas iniciales del toque.
+ * Captura las coordenadas iniciales del toque táctil.
  * @param {TouchEvent} e
  */
 function handleTouchStart(e) {
@@ -161,11 +351,8 @@ function handleTouchStart(e) {
   touchStartY = e.touches[0].clientY;
 }
 
-
 /**
- * Calcula la dirección del swipe y navega según corresponda.
- * Solo actúa si el desplazamiento horizontal supera el umbral
- * y es mayor que el desplazamiento vertical (evita conflictos con scroll).
+ * Evalúa el gesto táctil al finalizar y navega si corresponde a un swipe horizontal.
  * @param {TouchEvent} e
  */
 function handleTouchEnd(e) {
@@ -176,15 +363,15 @@ function handleTouchEnd(e) {
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
 
-  /* Solo considerar swipe si el movimiento horizontal es dominante */
+  /* Comprobar que el movimiento horizontal sea dominante sobre el vertical */
   if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
   if (Math.abs(deltaX) < Math.abs(deltaY)) return;
 
   if (deltaX < 0) {
-    /* Swipe izquierda → siguiente */
-    siguienteImagen();
+    /* Deslizamiento a la izquierda -> siguiente foto */
+    siguienteFotoModal();
   } else {
-    /* Swipe derecha → anterior */
-    anteriorImagen();
+    /* Deslizamiento a la derecha -> foto anterior */
+    anteriorFotoModal();
   }
 }
