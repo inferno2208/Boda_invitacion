@@ -3,9 +3,10 @@
  *
  * - Validación client-side con early returns
  * - Función única `enviarConfirmacion(datos)` para el servicio externo
- * - Prevención de doble envío
+ * - Prevención de doble envío con spinner visual
  * - Manejo explícito de errores (validación vs. red)
  * - URL del servicio desde CONFIG_BODA.rsvp.endpointUrl
+ * - Campo de preferencias dietéticas incluido
  */
 
 /**
@@ -40,6 +41,10 @@ function iniciarRsvp() {
     /* Prevención de doble envío */
     if (btnSubmit.disabled) return;
     btnSubmit.disabled = true;
+
+    /* Activar spinner visual */
+    btnSubmit.classList.add('rsvp__submit--loading');
+    const textoOriginal = btnSubmit.textContent;
     btnSubmit.textContent = 'Enviando...';
 
     try {
@@ -56,7 +61,8 @@ function iniciarRsvp() {
       console.error('[rsvp] Error al enviar:', error);
     } finally {
       btnSubmit.disabled = false;
-      btnSubmit.textContent = 'Confirmar Asistencia';
+      btnSubmit.classList.remove('rsvp__submit--loading');
+      btnSubmit.textContent = textoOriginal;
     }
   });
 }
@@ -65,7 +71,7 @@ function iniciarRsvp() {
 /**
  * Recoge los datos del formulario en un objeto plano.
  * @param {HTMLFormElement} form
- * @returns {{ nombre: string, email: string, asistencia: string, acompanantes: number, mensaje: string }}
+ * @returns {{ nombre: string, email: string, asistencia: string, acompanantes: number, dieta: string, mensaje: string }}
  */
 function recogerDatos(form) {
   return {
@@ -73,6 +79,7 @@ function recogerDatos(form) {
     email: form.elements['rsvp-email'].value.trim(),
     asistencia: form.elements['rsvp-asistencia'].value,
     acompanantes: parseInt(form.elements['rsvp-acompanantes'].value, 10) || 0,
+    dieta: form.elements['rsvp-dieta'] ? form.elements['rsvp-dieta'].value : '',
     mensaje: form.elements['rsvp-mensaje'].value.trim(),
   };
 }
@@ -157,7 +164,7 @@ function mostrarErroresValidacion(form, errores) {
  * Si `CONFIG_BODA.rsvp.endpointUrl` está vacío, simula un envío exitoso
  * (modo demo) con un delay de 1.5s.
  *
- * @param {{ nombre: string, email: string, asistencia: string, acompanantes: number, mensaje: string }} datos
+ * @param {{ nombre: string, email: string, asistencia: string, acompanantes: number, dieta: string, mensaje: string }} datos
  * @returns {Promise<void>}
  */
 async function enviarConfirmacion(datos) {

@@ -21,9 +21,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap">
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
   <!-- Estilos -->
@@ -34,8 +34,8 @@
 
   <!-- ═══════════════════════════════════════════════════════
        1. HERO / PORTADA
-       Foto de fondo a pantalla completa con overlay,
-       fecha, nombres, frase y flecha de scroll.
+       Foto de fondo a pantalla completa con overlay gradiente,
+       monograma, nombres, frase decorativa y flecha de scroll.
        ═══════════════════════════════════════════════════════ -->
   <section class="hero" id="hero" aria-label="Portada de la invitación">
     <!--
@@ -58,7 +58,10 @@
     <div class="hero__overlay" aria-hidden="true"></div>
 
     <div class="hero__contenido">
-      <p class="hero__fecha">27 . 02 . 2027</p>
+      <!-- Monograma decorativo -->
+      <div class="hero__monograma" aria-hidden="true">L&F</div>
+
+      <p class="hero__frase">¡Nos casamos!</p>
 
       <div class="hero__ornamento" aria-hidden="true">
         <svg class="hero__ornamento-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -69,7 +72,8 @@
 
       <h1 class="hero__nombres">Louis & Fabiola</h1>
 
-      <p class="hero__frase">¡Nos casamos!</p>
+      <p class="hero__fecha">27 ✦ 02 ✦ 2027</p>
+
       <p class="hero__subfrase">Y queremos compartir este día tan especial contigo</p>
     </div>
 
@@ -85,6 +89,7 @@
 
   <!-- ═══════════════════════════════════════════════════════
        2. CUENTA REGRESIVA
+       Tarjetas individuales minimalistas con números serif.
        Se calcula automáticamente desde CONFIG_BODA.fecha.iso.
        ═══════════════════════════════════════════════════════ -->
   <section class="seccion seccion--alterno countdown" id="countdown" aria-label="Cuenta regresiva">
@@ -98,24 +103,29 @@
       </div>
 
       <div class="countdown__grid" id="countdown-grid" aria-live="polite">
-        <div class="countdown__bloque">
-          <span class="countdown__numero" id="countdown-dias">--</span>
-          <span class="countdown__label">Días</span>
+        <div class="countdown__tarjeta">
+          <div class="countdown__bloque">
+            <span class="countdown__numero" id="countdown-dias">--</span>
+            <span class="countdown__label">Días</span>
+          </div>
         </div>
-        <span class="countdown__separador" aria-hidden="true">:</span>
-        <div class="countdown__bloque">
-          <span class="countdown__numero" id="countdown-horas">--</span>
-          <span class="countdown__label">Horas</span>
+        <div class="countdown__tarjeta">
+          <div class="countdown__bloque">
+            <span class="countdown__numero" id="countdown-horas">--</span>
+            <span class="countdown__label">Horas</span>
+          </div>
         </div>
-        <span class="countdown__separador" aria-hidden="true">:</span>
-        <div class="countdown__bloque">
-          <span class="countdown__numero" id="countdown-minutos">--</span>
-          <span class="countdown__label">Minutos</span>
+        <div class="countdown__tarjeta">
+          <div class="countdown__bloque">
+            <span class="countdown__numero" id="countdown-minutos">--</span>
+            <span class="countdown__label">Minutos</span>
+          </div>
         </div>
-        <span class="countdown__separador" aria-hidden="true">:</span>
-        <div class="countdown__bloque">
-          <span class="countdown__numero" id="countdown-segundos">--</span>
-          <span class="countdown__label">Segundos</span>
+        <div class="countdown__tarjeta">
+          <div class="countdown__bloque">
+            <span class="countdown__numero" id="countdown-segundos">--</span>
+            <span class="countdown__label">Segundos</span>
+          </div>
         </div>
       </div>
 
@@ -129,6 +139,7 @@
 
   <!-- ═══════════════════════════════════════════════════════
        3. NUESTRA HISTORIA / BIENVENIDA
+       Layout editorial de 2 columnas (foto + texto).
        ═══════════════════════════════════════════════════════ -->
   <section class="seccion historia" id="historia" aria-label="Nuestra historia">
     <div class="seccion__contenido">
@@ -140,32 +151,36 @@
         </svg>
       </div>
 
-      <div class="historia__imagen-container revelar">
-        <!--
-          IMAGEN HISTORIA:
-          ┌──────────────────────────────────────────────────┐
-          │  historia.webp → 800×600px                       │
-          │  Recomendación: foto de la pareja en un          │
-          │  momento informal / significativo.               │
-          └──────────────────────────────────────────────────┘
-        -->
-        <img class="historia__imagen" src="assets/images/historia.webp" alt="Louis y Fabiola — nuestra historia"
-          width="800" height="600" loading="lazy">
-      </div>
+      <div class="historia__grid">
+        <div class="historia__imagen-container revelar">
+          <!--
+            IMAGEN HISTORIA:
+            ┌──────────────────────────────────────────────────┐
+            │  historia.webp → 800×600px                       │
+            │  Recomendación: foto de la pareja en un          │
+            │  momento informal / significativo.               │
+            └──────────────────────────────────────────────────┘
+          -->
+          <img class="historia__imagen" src="assets/images/historia.webp" alt="Louis y Fabiola — nuestra historia"
+            width="800" height="600" loading="lazy">
+        </div>
 
-      <p class="historia__texto revelar">
-        Nos conocimos una tarde de otoño y desde entonces supimos que este momento llegaría. Después de años de
-        aventuras juntos, de risas compartidas y sueños construidos, estamos listos para dar el paso más importante de
-        nuestras vidas. Nos llena de alegría poder celebrarlo rodeados de las personas que más queremos.
-      </p>
+        <div class="revelar">
+          <p class="historia__texto">
+            Nos conocimos una tarde de otoño y desde entonces supimos que este momento llegaría. Después de años de
+            aventuras juntos, de risas compartidas y sueños construidos, estamos listos para dar el paso más importante
+            de nuestras vidas. Nos llena de alegría poder celebrarlo rodeados de las personas que más queremos.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
 
   <!-- ═══════════════════════════════════════════════════════
        4. DETALLES DEL EVENTO
-       Ceremonia + Recepción, cada una con hora, lugar,
-       dirección, botón "Cómo llegar" y mapa embebido.
+       Ceremonia + Recepción, cada una con icono decorativo,
+       hora, lugar, dirección, botón "Cómo llegar" y mapa.
        ═══════════════════════════════════════════════════════ -->
   <section class="seccion seccion--alterno detalles" id="detalles" aria-label="Detalles del evento">
     <div class="seccion__contenido">
@@ -180,6 +195,13 @@
       <div class="detalles__grid">
         <!-- Ceremonia -->
         <div class="tarjeta tarjeta--evento revelar">
+          <!-- Icono decorativo de iglesia/capilla -->
+          <svg class="tarjeta__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 22H6a1 1 0 0 1-1-1V11l7-9 7 9v10a1 1 0 0 1-1 1z"></path>
+            <path d="M9.5 22v-5a2.5 2.5 0 0 1 5 0v5"></path>
+            <path d="M12 2v4"></path>
+          </svg>
           <!--
             IMAGEN CEREMONIA:
             ┌──────────────────────────────────────┐
@@ -212,6 +234,14 @@
 
         <!-- Recepción -->
         <div class="tarjeta tarjeta--evento revelar">
+          <!-- Icono decorativo de copa de vino -->
+          <svg class="tarjeta__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 22h8"></path>
+            <path d="M12 11v11"></path>
+            <path d="M19.5 8c0 2.49-3.36 4.5-7.5 4.5S4.5 10.49 4.5 8"></path>
+            <path d="M4.5 2h15l-1 6H5.5L4.5 2z"></path>
+          </svg>
           <!--
             IMAGEN RECEPCIÓN:
             ┌──────────────────────────────────────┐
@@ -248,6 +278,7 @@
 
   <!-- ═══════════════════════════════════════════════════════
        5. CÓDIGO DE VESTIMENTA
+       Con paleta de colores sugerida para invitados.
        ═══════════════════════════════════════════════════════ -->
   <section class="seccion dresscode" id="dresscode" aria-label="Código de vestimenta">
     <div class="seccion__contenido">
@@ -274,13 +305,37 @@
 
       <p class="dresscode__tipo revelar">Formal / Etiqueta</p>
       <p class="dresscode__nota revelar">Evitar color blanco, por favor.</p>
+
+      <!-- Paleta de colores sugerida -->
+      <div class="dresscode__paleta revelar" aria-label="Paleta de colores sugerida">
+        <div class="dresscode__color">
+          <div class="dresscode__muestra" style="background-color: #C47D5E;" aria-label="Terracota"></div>
+          <span class="dresscode__color-nombre">Terracota</span>
+        </div>
+        <div class="dresscode__color">
+          <div class="dresscode__muestra" style="background-color: #7A8B6F;" aria-label="Oliva"></div>
+          <span class="dresscode__color-nombre">Oliva</span>
+        </div>
+        <div class="dresscode__color">
+          <div class="dresscode__muestra" style="background-color: #2D4A3E;" aria-label="Verde bosque"></div>
+          <span class="dresscode__color-nombre">Bosque</span>
+        </div>
+        <div class="dresscode__color">
+          <div class="dresscode__muestra" style="background-color: #A89279;" aria-label="Tierra"></div>
+          <span class="dresscode__color-nombre">Tierra</span>
+        </div>
+        <div class="dresscode__color">
+          <div class="dresscode__muestra" style="background-color: #D4C9B8;" aria-label="Lino"></div>
+          <span class="dresscode__color-nombre">Lino</span>
+        </div>
+      </div>
     </div>
   </section>
 
 
   <!-- ═══════════════════════════════════════════════════════
        6. GALERÍA DE FOTOS
-       Grid responsivo, todas en .webp, lazy loading.
+       Layout Bento Box con items destacados, lazy loading.
        ═══════════════════════════════════════════════════════ -->
   <section class="seccion seccion--alterno galeria" id="galeria" aria-label="Galería de fotos">
     <div class="seccion__contenido seccion__contenido--ancho">
@@ -298,12 +353,11 @@
         │  galeria-1.webp a galeria-8.webp → 800×800px     │
         │  Formato: .webp, cuadradas o con aspect-ratio    │
         │  similar para que el grid sea uniforme.          │
-        │  Recomendación: fotos variadas de la pareja     │
-        │  (viajes, momentos especiales, cotidianidad).   │
+        │  Items 1 y 6 son destacados (span 2 cols/rows). │
         └──────────────────────────────────────────────────┘
       -->
       <div class="galeria__grid" id="galeria-grid">
-        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 1 en grande">
+        <div class="galeria__item galeria__item--destacado revelar" tabindex="0" role="button" aria-label="Ver foto 1 en grande">
           <img src="assets/images/galeria-1.webp" alt="Foto de la pareja 1" width="800" height="800" loading="lazy">
         </div>
         <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 2 en grande">
@@ -318,7 +372,7 @@
         <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 5 en grande">
           <img src="assets/images/galeria-5.webp" alt="Foto de la pareja 5" width="800" height="800" loading="lazy">
         </div>
-        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 6 en grande">
+        <div class="galeria__item galeria__item--destacado revelar" tabindex="0" role="button" aria-label="Ver foto 6 en grande">
           <img src="assets/images/galeria-6.webp" alt="Foto de la pareja 6" width="800" height="800" loading="lazy">
         </div>
         <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 7 en grande">
@@ -387,8 +441,8 @@
 
   <!-- ═══════════════════════════════════════════════════════
        8. CONFIRMACIÓN DE ASISTENCIA (RSVP)
-       Formulario con validación, early returns,
-       manejo explícito de errores y función de envío aislada.
+       Formulario con validación, campo dietético,
+       spinner de carga y retroalimentación elegante.
        ═══════════════════════════════════════════════════════ -->
   <section class="seccion seccion--alterno rsvp" id="rsvp" aria-label="Confirmación de asistencia">
     <div class="seccion__contenido">
@@ -401,56 +455,70 @@
       </div>
       <p class="subtitulo revelar">Por favor confirma antes del 27 de enero de 2027</p>
 
-      <form class="rsvp__formulario revelar" id="rsvp-formulario" novalidate>
-        <!-- Nombre -->
-        <div class="rsvp__campo">
-          <label class="rsvp__label" for="rsvp-nombre">Nombre completo *</label>
-          <input class="rsvp__input" type="text" id="rsvp-nombre" name="rsvp-nombre" required autocomplete="name"
-            placeholder="Tu nombre completo">
-          <p class="rsvp__error" data-error-for="rsvp-nombre" aria-live="polite"></p>
-        </div>
+      <div class="rsvp__contenedor revelar">
+        <form class="rsvp__formulario" id="rsvp-formulario" novalidate>
+          <!-- Nombre -->
+          <div class="rsvp__campo">
+            <label class="rsvp__label" for="rsvp-nombre">Nombre completo *</label>
+            <input class="rsvp__input" type="text" id="rsvp-nombre" name="rsvp-nombre" required autocomplete="name"
+              placeholder="Tu nombre completo">
+            <p class="rsvp__error" data-error-for="rsvp-nombre" aria-live="polite"></p>
+          </div>
 
-        <!-- Email -->
-        <div class="rsvp__campo">
-          <label class="rsvp__label" for="rsvp-email">Correo electrónico *</label>
-          <input class="rsvp__input" type="email" id="rsvp-email" name="rsvp-email" required autocomplete="email"
-            placeholder="tu@email.com">
-          <p class="rsvp__error" data-error-for="rsvp-email" aria-live="polite"></p>
-        </div>
+          <!-- Email -->
+          <div class="rsvp__campo">
+            <label class="rsvp__label" for="rsvp-email">Correo electrónico *</label>
+            <input class="rsvp__input" type="email" id="rsvp-email" name="rsvp-email" required autocomplete="email"
+              placeholder="tu@email.com">
+            <p class="rsvp__error" data-error-for="rsvp-email" aria-live="polite"></p>
+          </div>
 
-        <!-- Asistencia -->
-        <div class="rsvp__campo">
-          <label class="rsvp__label" for="rsvp-asistencia">¿Asistirás? *</label>
-          <select class="rsvp__select" id="rsvp-asistencia" name="rsvp-asistencia" required>
-            <option value="">Selecciona una opción</option>
-            <option value="si">Sí, ¡ahí estaré!</option>
-            <option value="no">No podré asistir</option>
-          </select>
-          <p class="rsvp__error" data-error-for="rsvp-asistencia" aria-live="polite"></p>
-        </div>
+          <!-- Asistencia -->
+          <div class="rsvp__campo">
+            <label class="rsvp__label" for="rsvp-asistencia">¿Asistirás? *</label>
+            <select class="rsvp__select" id="rsvp-asistencia" name="rsvp-asistencia" required>
+              <option value="">Selecciona una opción</option>
+              <option value="si">Sí, ¡ahí estaré!</option>
+              <option value="no">No podré asistir</option>
+            </select>
+            <p class="rsvp__error" data-error-for="rsvp-asistencia" aria-live="polite"></p>
+          </div>
 
-        <!-- Acompañantes -->
-        <div class="rsvp__campo">
-          <label class="rsvp__label" for="rsvp-acompanantes">Número de acompañantes</label>
-          <input class="rsvp__input" type="number" id="rsvp-acompanantes" name="rsvp-acompanantes" min="0" max="10"
-            value="0" autocomplete="off">
-          <p class="rsvp__error" data-error-for="rsvp-acompanantes" aria-live="polite"></p>
-        </div>
+          <!-- Acompañantes -->
+          <div class="rsvp__campo">
+            <label class="rsvp__label" for="rsvp-acompanantes">Número de acompañantes</label>
+            <input class="rsvp__input" type="number" id="rsvp-acompanantes" name="rsvp-acompanantes" min="0" max="10"
+              value="0" autocomplete="off">
+            <p class="rsvp__error" data-error-for="rsvp-acompanantes" aria-live="polite"></p>
+          </div>
 
-        <!-- Mensaje -->
-        <div class="rsvp__campo">
-          <label class="rsvp__label" for="rsvp-mensaje">Mensaje (opcional)</label>
-          <textarea class="rsvp__textarea" id="rsvp-mensaje" name="rsvp-mensaje" rows="3"
-            placeholder="¿Alguna nota o felicitación?"></textarea>
-        </div>
+          <!-- Preferencias dietéticas -->
+          <div class="rsvp__campo">
+            <label class="rsvp__label" for="rsvp-dieta">Preferencias dietéticas</label>
+            <select class="rsvp__select" id="rsvp-dieta" name="rsvp-dieta">
+              <option value="">Sin restricciones</option>
+              <option value="vegetariano">Vegetariano</option>
+              <option value="vegano">Vegano</option>
+              <option value="sin-gluten">Sin gluten</option>
+              <option value="otro">Otro (especificar en mensaje)</option>
+            </select>
+          </div>
 
-        <button type="submit" class="btn btn--primario rsvp__submit" id="btn-rsvp-submit">
-          Confirmar Asistencia
-        </button>
+          <!-- Mensaje -->
+          <div class="rsvp__campo">
+            <label class="rsvp__label" for="rsvp-mensaje">Mensaje (opcional)</label>
+            <textarea class="rsvp__textarea" id="rsvp-mensaje" name="rsvp-mensaje" rows="3"
+              placeholder="¿Alguna nota o felicitación?"></textarea>
+          </div>
 
-        <!-- Resultado del envío (éxito o error de red) -->
-        <div class="rsvp__resultado" id="rsvp-resultado" aria-live="polite"></div>
-      </form>
+          <button type="submit" class="btn btn--primario rsvp__submit" id="btn-rsvp-submit">
+            Confirmar Asistencia
+          </button>
+
+          <!-- Resultado del envío (éxito o error de red) -->
+          <div class="rsvp__resultado" id="rsvp-resultado" aria-live="polite"></div>
+        </form>
+      </div>
     </div>
   </section>
 
