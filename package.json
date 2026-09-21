@@ -1,0 +1,21 @@
+{
+  "name": "invitacion-boda",
+  "version": "1.0.0",
+  "description": "Invitación de Boda Digital — Louis & Fabiola",
+  "scripts": {
+    "start": "serve -l 3000 .",
+    "dev": "serve -l 3000 ."
+  },
+  "keywords": [
+    "wedding",
+    "invitation",
+    "html5",
+    "css3",
+    "vanilla-js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

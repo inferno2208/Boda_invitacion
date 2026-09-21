@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Louis & Fabiola — 27.02.2027 | Invitación de Boda</title>
+  <meta name="description"
+    content="Louis y Fabiola se casan el 27 de febrero de 2027. Encuentra toda la información del evento y confirma tu asistencia.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="¡Nos casamos! — Louis & Fabiola">
+  <meta property="og:description" content="Acompáñanos en nuestra boda el 27 de febrero de 2027.">
+  <meta property="og:type" content="website">
+  <!-- og:image → reemplazar con imagen real cuando esté lista -->
+  <meta property="og:image" content="assets/images/hero-desktop.webp">
+
+  <!-- Preload: fuentes y hero image para LCP óptimo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       1. HERO / PORTADA
+       Foto de fondo a pantalla completa con overlay,
+       fecha, nombres, frase y flecha de scroll.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero" aria-label="Portada de la invitación">
+    <!--
+      IMAGEN HERO:
+      ┌──────────────────────────────────────────────────┐
+      │  hero-mobile.webp  →  750×1200px  (< 768px)     │
+      │  hero-tablet.webp  → 1200×900px   (768–1023px)  │
+      │  hero-desktop.webp → 1920×1080px  (≥ 1024px)    │
+      │  Formato: .webp                                  │
+      │  Recomendación: foto de la pareja, exterior,     │
+      │  fondo suave para que el texto sea legible.      │
+      └──────────────────────────────────────────────────┘
+    -->
+    <picture>
+      <source media="(min-width: 1024px)" srcset="assets/images/hero-desktop.webp" type="image/webp">
+      <source media="(min-width: 768px)" srcset="assets/images/hero-tablet.webp" type="image/webp">
+      <img class="hero__imagen" src="assets/images/hero-mobile.webp" alt="Louis y Fabiola — foto de la pareja"
+        width="750" height="1200" fetchpriority="high">
+    </picture>
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <div class="hero__contenido">
+      <p class="hero__fecha">27 . 02 . 2027</p>
+
+      <div class="hero__ornamento" aria-hidden="true">
+        <svg class="hero__ornamento-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <h1 class="hero__nombres">Louis & Fabiola</h1>
+
+      <p class="hero__frase">¡Nos casamos!</p>
+      <p class="hero__subfrase">Y queremos compartir este día tan especial contigo</p>
+    </div>
+
+    <button class="hero__scroll-arrow" id="scroll-arrow" aria-label="Desplazarse hacia abajo">
+      <span>Descubre más</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       2. CUENTA REGRESIVA
+       Se calcula automáticamente desde CONFIG_BODA.fecha.iso.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion seccion--alterno countdown" id="countdown" aria-label="Cuenta regresiva">
+    <div class="seccion__contenido revelar">
+      <h2 class="titulo-seccion">Faltan</h2>
+      <div class="linea-ornamento" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <div class="countdown__grid" id="countdown-grid" aria-live="polite">
+        <div class="countdown__bloque">
+          <span class="countdown__numero" id="countdown-dias">--</span>
+          <span class="countdown__label">Días</span>
+        </div>
+        <span class="countdown__separador" aria-hidden="true">:</span>
+        <div class="countdown__bloque">
+          <span class="countdown__numero" id="countdown-horas">--</span>
+          <span class="countdown__label">Horas</span>
+        </div>
+        <span class="countdown__separador" aria-hidden="true">:</span>
+        <div class="countdown__bloque">
+          <span class="countdown__numero" id="countdown-minutos">--</span>
+          <span class="countdown__label">Minutos</span>
+        </div>
+        <span class="countdown__separador" aria-hidden="true">:</span>
+        <div class="countdown__bloque">
+          <span class="countdown__numero" id="countdown-segundos">--</span>
+          <span class="countdown__label">Segundos</span>
+        </div>
+      </div>
+
+      <!-- Mensaje post-boda (oculto por defecto, visible vía JS) -->
+      <p class="countdown__mensaje-final countdown__mensaje-final--oculto" id="countdown-mensaje-final">
+        ¡Ya nos casamos! 💍
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       3. NUESTRA HISTORIA / BIENVENIDA
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion historia" id="historia" aria-label="Nuestra historia">
+    <div class="seccion__contenido">
+      <h2 class="titulo-seccion revelar">Nuestra Historia</h2>
+      <div class="linea-ornamento revelar" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <div class="historia__imagen-container revelar">
+        <!--
+          IMAGEN HISTORIA:
+          ┌──────────────────────────────────────────────────┐
+          │  historia.webp → 800×600px                       │
+          │  Recomendación: foto de la pareja en un          │
+          │  momento informal / significativo.               │
+          └──────────────────────────────────────────────────┘
+        -->
+        <img class="historia__imagen" src="assets/images/historia.webp" alt="Louis y Fabiola — nuestra historia"
+          width="800" height="600" loading="lazy">
+      </div>
+
+      <p class="historia__texto revelar">
+        Nos conocimos una tarde de otoño y desde entonces supimos que este momento llegaría. Después de años de
+        aventuras juntos, de risas compartidas y sueños construidos, estamos listos para dar el paso más importante de
+        nuestras vidas. Nos llena de alegría poder celebrarlo rodeados de las personas que más queremos.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       4. DETALLES DEL EVENTO
+       Ceremonia + Recepción, cada una con hora, lugar,
+       dirección, botón "Cómo llegar" y mapa embebido.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion seccion--alterno detalles" id="detalles" aria-label="Detalles del evento">
+    <div class="seccion__contenido">
+      <h2 class="titulo-seccion revelar">Detalles del Evento</h2>
+      <div class="linea-ornamento revelar" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <div class="detalles__grid">
+        <!-- Ceremonia -->
+        <div class="tarjeta tarjeta--evento revelar">
+          <!--
+            IMAGEN CEREMONIA:
+            ┌──────────────────────────────────────┐
+            │  ceremonia.webp → 600×400px           │
+            │  Recomendación: fachada de la         │
+            │  iglesia o interior del templo.       │
+            └──────────────────────────────────────┘
+          -->
+          <img class="tarjeta__imagen" src="assets/images/ceremonia.webp" alt="Posada el pozo — lugar de la ceremonia"
+            width="600" height="400" loading="lazy">
+          <h3 class="tarjeta__titulo">Ceremonia</h3>
+          <p class="tarjeta__hora">17:00 h</p>
+          <p class="tarjeta__lugar">Posada el pozo</p>
+          <p class="tarjeta__direccion">Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo</p>
+          <a href="https://maps.app.goo.gl/gBVBAStTH312Dewk7" target="_blank" rel="noopener noreferrer"
+            class="btn btn--secundario" id="btn-mapa-ceremonia">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Cómo Llegar
+          </a>
+          <div class="mapa-container">
+            <iframe title="Mapa de la ceremonia — Posada el pozo " src="https://maps.app.goo.gl/gBVBAStTH312Dewk7"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <!-- Recepción -->
+        <div class="tarjeta tarjeta--evento revelar">
+          <!--
+            IMAGEN RECEPCIÓN:
+            ┌──────────────────────────────────────┐
+            │  recepcion.webp → 600×400px           │
+            │  Recomendación: vista de la hacienda  │
+            │  o salón de la recepción.             │
+            └──────────────────────────────────────┘
+          -->
+          <img class="tarjeta__imagen" src="assets/images/recepcion.webp"
+            alt="Hacienda Los Olivos — lugar de la recepción" width="600" height="400" loading="lazy">
+          <h3 class="tarjeta__titulo">Recepción</h3>
+          <p class="tarjeta__hora">19:00 h</p>
+          <p class="tarjeta__lugar">Hacienda Los Olivos</p>
+          <p class="tarjeta__direccion">Carretera Vieja, km 5 — Ciudad, Estado</p>
+          <a href="https://maps.google.com/?q=Hacienda+Los+Olivos" target="_blank" rel="noopener noreferrer"
+            class="btn btn--secundario" id="btn-mapa-recepcion">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Cómo Llegar
+          </a>
+          <div class="mapa-container">
+            <iframe title="Mapa de la recepción — Hacienda Los Olivos"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.0!2d-99.16!3d19.42!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzEyLjAiTiA5OcKwMDknMzYuMCJX!5e0!3m2!1ses!2smx!4v1"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       5. CÓDIGO DE VESTIMENTA
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion dresscode" id="dresscode" aria-label="Código de vestimenta">
+    <div class="seccion__contenido">
+      <h2 class="titulo-seccion revelar">Código de Vestimenta</h2>
+      <div class="linea-ornamento revelar" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <div class="dresscode__imagen-container revelar">
+        <!--
+          IMAGEN DRESS CODE:
+          ┌──────────────────────────────────────┐
+          │  dresscode.webp → 600×800px           │
+          │  Recomendación: ilustración o foto    │
+          │  de referencia del estilo formal.     │
+          └──────────────────────────────────────┘
+        -->
+        <img class="dresscode__imagen" src="assets/images/dresscode.webp" alt="Código de vestimenta — formal / etiqueta"
+          width="600" height="800" loading="lazy">
+      </div>
+
+      <p class="dresscode__tipo revelar">Formal / Etiqueta</p>
+      <p class="dresscode__nota revelar">Evitar color blanco, por favor.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       6. GALERÍA DE FOTOS
+       Grid responsivo, todas en .webp, lazy loading.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion seccion--alterno galeria" id="galeria" aria-label="Galería de fotos">
+    <div class="seccion__contenido seccion__contenido--ancho">
+      <h2 class="titulo-seccion revelar">Nuestra Galería</h2>
+      <div class="linea-ornamento revelar" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <!--
+        IMÁGENES DE GALERÍA:
+        ┌──────────────────────────────────────────────────┐
+        │  galeria-1.webp a galeria-8.webp → 800×800px     │
+        │  Formato: .webp, cuadradas o con aspect-ratio    │
+        │  similar para que el grid sea uniforme.          │
+        │  Recomendación: fotos variadas de la pareja     │
+        │  (viajes, momentos especiales, cotidianidad).   │
+        └──────────────────────────────────────────────────┘
+      -->
+      <div class="galeria__grid" id="galeria-grid">
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 1 en grande">
+          <img src="assets/images/galeria-1.webp" alt="Foto de la pareja 1" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 2 en grande">
+          <img src="assets/images/galeria-2.webp" alt="Foto de la pareja 2" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 3 en grande">
+          <img src="assets/images/galeria-3.webp" alt="Foto de la pareja 3" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 4 en grande">
+          <img src="assets/images/galeria-4.webp" alt="Foto de la pareja 4" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 5 en grande">
+          <img src="assets/images/galeria-5.webp" alt="Foto de la pareja 5" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 6 en grande">
+          <img src="assets/images/galeria-6.webp" alt="Foto de la pareja 6" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 7 en grande">
+          <img src="assets/images/galeria-7.webp" alt="Foto de la pareja 7" width="800" height="800" loading="lazy">
+        </div>
+        <div class="galeria__item revelar" tabindex="0" role="button" aria-label="Ver foto 8 en grande">
+          <img src="assets/images/galeria-8.webp" alt="Foto de la pareja 8" width="800" height="800" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox (dialog nativo) — fuera del grid, al nivel del body -->
+  <dialog class="lightbox" id="lightbox" aria-label="Visor de imagen">
+    <div class="lightbox__contenido">
+      <button class="lightbox__cerrar" id="lightbox-cerrar" aria-label="Cerrar visor">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <button class="lightbox__nav lightbox__nav--anterior" id="lightbox-anterior" aria-label="Imagen anterior">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <img class="lightbox__imagen" id="lightbox-imagen" src="" alt="">
+      <button class="lightbox__nav lightbox__nav--siguiente" id="lightbox-siguiente" aria-label="Imagen siguiente">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </dialog>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       7. MESA DE REGALOS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion regalos" id="regalos" aria-label="Mesa de regalos">
+    <div class="seccion__contenido regalos__contenido">
+      <h2 class="titulo-seccion revelar">Mesa de Regalos</h2>
+      <div class="linea-ornamento revelar" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+
+      <p class="subtitulo revelar">
+        Lo más importante para nosotros es tu presencia. Sin embargo, si deseas hacernos un obsequio, puedes contribuir
+        a nuestro fondo de luna de miel.
+      </p>
+
+      <div class="regalos__banco revelar">
+        <p class="regalos__dato"><strong>Banco Ejemplo</strong></p>
+        <p class="regalos__dato">CLABE: 0123 4567 8901 2345 67</p>
+        <p class="regalos__dato">Titular: Louis & Fabiola</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       8. CONFIRMACIÓN DE ASISTENCIA (RSVP)
+       Formulario con validación, early returns,
+       manejo explícito de errores y función de envío aislada.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion seccion--alterno rsvp" id="rsvp" aria-label="Confirmación de asistencia">
+    <div class="seccion__contenido">
+      <h2 class="titulo-seccion revelar">Confirma tu Asistencia</h2>
+      <div class="linea-ornamento revelar" aria-hidden="true">
+        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+      <p class="subtitulo revelar">Por favor confirma antes del 27 de enero de 2027</p>
+
+      <form class="rsvp__formulario revelar" id="rsvp-formulario" novalidate>
+        <!-- Nombre -->
+        <div class="rsvp__campo">
+          <label class="rsvp__label" for="rsvp-nombre">Nombre completo *</label>
+          <input class="rsvp__input" type="text" id="rsvp-nombre" name="rsvp-nombre" required autocomplete="name"
+            placeholder="Tu nombre completo">
+          <p class="rsvp__error" data-error-for="rsvp-nombre" aria-live="polite"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="rsvp__campo">
+          <label class="rsvp__label" for="rsvp-email">Correo electrónico *</label>
+          <input class="rsvp__input" type="email" id="rsvp-email" name="rsvp-email" required autocomplete="email"
+            placeholder="tu@email.com">
+          <p class="rsvp__error" data-error-for="rsvp-email" aria-live="polite"></p>
+        </div>
+
+        <!-- Asistencia -->
+        <div class="rsvp__campo">
+          <label class="rsvp__label" for="rsvp-asistencia">¿Asistirás? *</label>
+          <select class="rsvp__select" id="rsvp-asistencia" name="rsvp-asistencia" required>
+            <option value="">Selecciona una opción</option>
+            <option value="si">Sí, ¡ahí estaré!</option>
+            <option value="no">No podré asistir</option>
+          </select>
+          <p class="rsvp__error" data-error-for="rsvp-asistencia" aria-live="polite"></p>
+        </div>
+
+        <!-- Acompañantes -->
+        <div class="rsvp__campo">
+          <label class="rsvp__label" for="rsvp-acompanantes">Número de acompañantes</label>
+          <input class="rsvp__input" type="number" id="rsvp-acompanantes" name="rsvp-acompanantes" min="0" max="10"
+            value="0" autocomplete="off">
+          <p class="rsvp__error" data-error-for="rsvp-acompanantes" aria-live="polite"></p>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="rsvp__campo">
+          <label class="rsvp__label" for="rsvp-mensaje">Mensaje (opcional)</label>
+          <textarea class="rsvp__textarea" id="rsvp-mensaje" name="rsvp-mensaje" rows="3"
+            placeholder="¿Alguna nota o felicitación?"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primario rsvp__submit" id="btn-rsvp-submit">
+          Confirmar Asistencia
+        </button>
+
+        <!-- Resultado del envío (éxito o error de red) -->
+        <div class="rsvp__resultado" id="rsvp-resultado" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       9. HASHTAG
+       ═══════════════════════════════════════════════════════ -->
+  <section class="seccion hashtag" id="hashtag" aria-label="Hashtag de la boda">
+    <div class="seccion__contenido revelar texto-centrado">
+      <p class="subtitulo">Comparte tus fotos con nuestro hashtag</p>
+      <p class="hashtag__tag">#LouisYFabi2027</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       10. FOOTER
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <p class="footer__nombres">Louis & Fabiola</p>
+    <p class="footer__fecha">27 . 02 . 2027</p>
+    <div class="linea-ornamento linea-ornamento--footer" aria-hidden="true">
+      <svg class="linea-ornamento__icono linea-ornamento__icono--footer" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+      </svg>
+    </div>
+    <p class="footer__texto">Esperamos celebrar juntos este día tan especial</p>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCRIPTS
+       Orden: config (datos) → módulos → main (inicialización)
+       ═══════════════════════════════════════════════════════ -->
+  <script src="js/config.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/rsvp.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/scroll-animations.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
