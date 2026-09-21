@@ -39,17 +39,17 @@ const CONFIG_BODA = {
     /** URL de Google Maps para el botón "Cómo llegar" */
     mapaUrl: 'https://maps.app.goo.gl/gBVBAStTH312Dewk7',
     /** URL de iframe embebido (con loading="lazy") */
-    mapaEmbed: 'https://maps.app.goo.gl/gBVBAStTH312Dewk7',
+    mapaEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.5!2d-70.7188355!3d9.1149081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e633d4d5bcad337%3A0x4e42133ce6cf2865!2sPosada%20Finca%20El%20Pozo!5e0!3m2!1ses!2sve!4v1726943000000!5m2!1ses!2sve',
   },
 
   /* ─── Recepción ─────────────────────────────────────────── */
   recepcion: {
     titulo: 'Recepción',
     hora: '19:00 h',
-    lugar: 'Hacienda Los Olivos',
-    direccion: 'Carretera Vieja, km 5 — Ciudad, Estado',
-    mapaUrl: 'https://maps.google.com/?q=Hacienda+Los+Olivos',
-    mapaEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.0!2d-99.16!3d19.42!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzEyLjAiTiA5OcKwMDknMzYuMCJX!5e0!3m2!1ses!2smx!4v1',
+    lugar: 'Posada el pozo',
+    direccion: 'Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo',
+    mapaUrl: 'https://maps.app.goo.gl/gBVBAStTH312Dewk7',
+    mapaEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.5!2d-70.7188355!3d9.1149081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e633d4d5bcad337%3A0x4e42133ce6cf2865!2sPosada%20Finca%20El%20Pozo!5e0!3m2!1ses!2sve!4v1726943000000!5m2!1ses!2sve',
   },
 
   /* ─── Textos ────────────────────────────────────────────── */
