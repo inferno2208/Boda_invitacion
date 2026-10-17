@@ -117,17 +117,24 @@ a nuestro fondo de luna de miel.`,
     dresscode: 'assets/images/dresscode.webp',
   },
 
-  /* ─── RSVP — Servicio externo ───────────────────────────── */
+  /* ─── RSVP — Servicio externo (Google Sheets) ──────────── */
   rsvp: {
     /**
-     * URL del servicio de envío (Formspree, Google Sheets, EmailJS...).
-     * Cambiar esta URL es lo único necesario para conectar el formulario.
-     * Dejar vacío para modo demo (simula envío exitoso).
+     * Planilla de control de invitados en Google Sheets:
+     * https://docs.google.com/spreadsheets/d/1xh57iG_DeFoPKmmtBWYgfKLtis63bJ-7fUCybuDRCgs/edit
      */
-    endpointUrl: '',
+    spreadsheetId: '1xh57iG_DeFoPKmmtBWYgfKLtis63bJ-7fUCybuDRCgs',
+    spreadsheetUrl: 'https://docs.google.com/spreadsheets/d/1xh57iG_DeFoPKmmtBWYgfKLtis63bJ-7fUCybuDRCgs/edit',
+
+    /**
+     * URL de la aplicación web de Google Apps Script (terminada en /exec).
+     * Sigue las instrucciones de 2 minutos en `google-sheets-script.js`
+     * para obtener tu URL y pegarla aquí.
+     * Si se deja vacía '', el sitio funciona en modo demo (simulación exitosa).
+     */
+    endpointUrl: 'https://script.google.com/macros/s/AKfycbyvHUkPdutDBeXBNWq1HXU6fiBpBwf5DH0ftOoQCcp6xby4FDezX55xyN48pwamJoNVBQ/exec',
+
     /** Método HTTP para el envío */
     metodo: 'POST',
-    /** Número máximo de acompañantes permitidos */
-    maxAcompanantes: 10,
   },
 };

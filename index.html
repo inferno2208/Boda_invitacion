@@ -4,625 +4,596 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ecdccb">
 
   <!-- SEO -->
-  <title>Louis & Fabiola — 27.02.2027 | Invitación de Boda</title>
+  <title>Louis &amp; Fabiola — 27.02.2027 | Invitación de Boda</title>
   <meta name="description"
-    content="Louis y Fabiola se casan el 27 de febrero de 2027. Encuentra toda la información del evento y confirma tu asistencia.">
+    content="Louis y Fabiola se casan el 27 de febrero de 2027. Abre la carta, descubre todos los detalles y confirma tu asistencia.">
+  <link rel="canonical" href="https://inferno2208.github.io/Boda_invitacion/">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="¡Nos casamos! — Louis & Fabiola">
-  <meta property="og:description" content="Acompáñanos en nuestra boda el 27 de febrero de 2027.">
+  <!--
+    VISTA PREVIA EN WHATSAPP / REDES
+    WhatsApp exige URL ABSOLUTA y JPG/PNG (< 300 KB): por eso este es el único
+    archivo .jpg que carga el sitio. Es el frame 0 de assets/Carta_heros.
+  -->
   <meta property="og:type" content="website">
-  <!-- og:image → reemplazar con imagen real cuando esté lista -->
-  <meta property="og:image" content="assets/images/hero-desktop.webp">
+  <meta property="og:site_name" content="Boda Louis &amp; Fabiola">
+  <meta property="og:locale" content="es_LA">
+  <meta property="og:url" content="https://inferno2208.github.io/Boda_invitacion/">
+  <meta property="og:title" content="💌 Louis &amp; Fabiola — ¡Nos casamos!">
+  <meta property="og:description" content="Tienes una carta para ti. Tócala para abrir tu invitación · 27 de febrero de 2027">
+  <meta property="og:image" content="https://inferno2208.github.io/Boda_invitacion/assets/images/preview-whatsapp.jpg">
+  <meta property="og:image:secure_url" content="https://inferno2208.github.io/Boda_invitacion/assets/images/preview-whatsapp.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta property="og:image:alt" content="Carta sellada con lacre dorado L&amp;F y listón verde salvia">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="💌 Louis &amp; Fabiola — ¡Nos casamos!">
+  <meta name="twitter:description" content="Tienes una carta para ti. Tócala para abrir tu invitación.">
+  <meta name="twitter:image" content="https://inferno2208.github.io/Boda_invitacion/assets/images/preview-whatsapp.jpg">
 
-  <!-- Preload: fuentes y hero image para LCP óptimo -->
+  <!-- Fuentes: Cinzel (títulos), Sacramento (caligrafía), Poppins (texto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap">
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Poppins:wght@300;400;500&family=Sacramento&display=swap"
     rel="stylesheet">
 
-  <!-- Estilos -->
+  <!-- El póster de la carta es lo primero que se ve: se pide antes que todo -->
+  <link rel="preload" as="image" href="assets/images/carta-hero-poster-mobile.webp" media="(max-width: 767px)">
+  <link rel="preload" as="image" href="assets/images/carta-hero-poster-desktop.webp" media="(min-width: 768px)">
+
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
   <!-- ═══════════════════════════════════════════════════════
-       1. HERO / PORTADA
-       Foto de fondo a pantalla completa con overlay gradiente,
-       monograma, nombres, frase decorativa y flecha de scroll.
+       SPRITE DE ICONOS (se define una vez, se reutiliza con <use>)
        ═══════════════════════════════════════════════════════ -->
-  <section class="hero" id="hero" aria-label="Portada de la invitación">
-    <!--
-      IMAGEN HERO:
-      ┌──────────────────────────────────────────────────┐
-      │  hero-mobile.webp  →  750×1200px  (< 768px)     │
-      │  hero-tablet.webp  → 1200×900px   (768–1023px)  │
-      │  hero-desktop.webp → 1920×1080px  (≥ 1024px)    │
-      │  Formato: .webp                                  │
-      │  Recomendación: foto de la pareja, exterior,     │
-      │  fondo suave para que el texto sea legible.      │
-      └──────────────────────────────────────────────────┘
-    -->
-    <picture>
-      <source media="(min-width: 1024px)" srcset="assets/images/hero-desktop.webp" type="image/webp">
-      <source media="(min-width: 768px)" srcset="assets/images/hero-tablet.webp" type="image/webp">
-      <img class="hero__imagen" src="assets/images/hero-mobile.webp" alt="Louis y Fabiola — foto de la pareja"
-        width="750" height="1200" fetchpriority="high">
-    </picture>
-    <div class="hero__overlay" aria-hidden="true"></div>
-
-    <div class="hero__contenido">
-      <!-- Monograma decorativo -->
-      <div class="hero__monograma" aria-hidden="true">L&F</div>
-
-      <p class="hero__frase">¡Nos casamos!</p>
-
-      <div class="hero__ornamento" aria-hidden="true">
-        <svg class="hero__ornamento-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
-
-      <h1 class="hero__nombres">Louis & Fabiola</h1>
-
-      <p class="hero__fecha">27 ✦ 02 ✦ 2027</p>
-
-      <p class="hero__subfrase">Y queremos compartir este día tan especial contigo</p>
-    </div>
-
-    <button class="hero__scroll-arrow" id="scroll-arrow" aria-label="Desplazarse hacia abajo">
-      <span>Descubre más</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round" aria-hidden="true">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
-  </section>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <!-- Rama de olivo: hojas en currentColor, opacidades para dar volumen -->
+    <symbol id="icono-rama" viewBox="0 0 200 80">
+      <path d="M4 72 C 50 62, 112 42, 196 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <g fill="currentColor">
+        <ellipse cx="36" cy="55" rx="15" ry="4.6" transform="rotate(-48 36 55)" fill-opacity=".85" />
+        <ellipse cx="42" cy="72" rx="14" ry="4.4" transform="rotate(14 42 72)" fill-opacity=".6" />
+        <ellipse cx="64" cy="46" rx="16" ry="4.8" transform="rotate(-52 64 46)" fill-opacity=".7" />
+        <ellipse cx="72" cy="63" rx="15" ry="4.6" transform="rotate(10 72 63)" fill-opacity=".9" />
+        <ellipse cx="94" cy="37" rx="16" ry="4.8" transform="rotate(-55 94 37)" fill-opacity=".9" />
+        <ellipse cx="103" cy="53" rx="15" ry="4.6" transform="rotate(6 103 53)" fill-opacity=".65" />
+        <ellipse cx="124" cy="27" rx="15" ry="4.6" transform="rotate(-58 124 27)" fill-opacity=".6" />
+        <ellipse cx="134" cy="42" rx="15" ry="4.6" transform="rotate(2 134 42)" fill-opacity=".85" />
+        <ellipse cx="156" cy="18" rx="13" ry="4.2" transform="rotate(-60 156 18)" fill-opacity=".8" />
+        <ellipse cx="165" cy="29" rx="13" ry="4.2" transform="rotate(-4 165 29)" fill-opacity=".6" />
+        <ellipse cx="188" cy="10" rx="9" ry="3.6" transform="rotate(-20 188 10)" fill-opacity=".9" />
+        <circle cx="84" cy="58" r="4.2" />
+        <circle cx="146" cy="36" r="3.8" fill-opacity=".8" />
+      </g>
+    </symbol>
+    <symbol id="icono-anillos" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="14.5" r="5.5" /><circle cx="15" cy="14.5" r="5.5" /><path d="M10.5 5.5 12 3l1.5 2.5L12 7z" />
+      </g>
+    </symbol>
+    <symbol id="icono-copas" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 3h5l-.4 5a2.1 2.1 0 0 1-4.2 0zM7.5 10.2V20M5 20h5" />
+        <path d="M14 3h5l-.4 5a2.1 2.1 0 0 1-4.2 0zM16.5 10.2V20M14 20h5" />
+      </g>
+    </symbol>
+    <symbol id="icono-ubicacion" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" />
+      </g>
+    </symbol>
+    <symbol id="icono-calendario" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4.5" width="18" height="16.5" rx="2" /><path d="M16 2.5v4M8 2.5v4M3 10h18M12 13.5v4M10 15.5h4" />
+      </g>
+    </symbol>
+    <symbol id="icono-luna" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
+        <path d="M17 3v3M15.5 4.5h3M21 8.5v2M20 9.5h2" />
+      </g>
+    </symbol>
+    <symbol id="icono-regalo" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="8" width="18" height="4" rx="1" /><path d="M5 12v9h14v-9M12 8v13" />
+        <path d="M12 8S10.5 3.5 8 3.5a2.25 2.25 0 0 0 0 4.5zM12 8s1.5-4.5 4-4.5a2.25 2.25 0 0 1 0 4.5z" />
+      </g>
+    </symbol>
+    <symbol id="icono-vestimenta" viewBox="0 0 48 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 3l4 3 4-3 3 2-1.5 17h-11L3 5zM10 6v4M8.5 8.5 10 10l1.5-1.5" />
+        <path d="M34 2h4l-.6 4 4.6 16H30l4.6-16z" /><path d="M33.4 6h5.2" />
+      </g>
+    </symbol>
+    <symbol id="icono-lupa" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35M11 8v6M8 11h6" />
+      </g>
+    </symbol>
+    <symbol id="icono-flecha-izq" viewBox="0 0 24 24">
+      <polyline points="15 18 9 12 15 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="icono-flecha-der" viewBox="0 0 24 24">
+      <polyline points="9 18 15 12 9 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+  </svg>
 
 
   <!-- ═══════════════════════════════════════════════════════
-       2. CUENTA REGRESIVA
-       Tarjetas individuales minimalistas con números serif.
-       Se calcula automáticamente desde CONFIG_BODA.fecha.iso.
+       0. INTRO — LA CARTA
+       Video generado con los frames de assets/Carta_heros
+       (npm run video:hero). El póster es el frame 0.
+       Sin JS: el enlace lleva a #portada y el CSS oculta la intro.
        ═══════════════════════════════════════════════════════ -->
-  <section class="seccion seccion--alterno countdown" id="countdown" aria-label="Cuenta regresiva">
-    <div class="seccion__contenido revelar">
-      <h2 class="titulo-seccion">Faltan</h2>
-      <div class="linea-ornamento" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
+  <div class="intro" id="intro-carta" role="dialog" aria-modal="true" aria-labelledby="intro-titulo">
+    <div class="intro__escena">
+      <p class="intro__antetitulo" id="intro-titulo">Tienes una invitación</p>
+
+      <button class="intro__carta" id="intro-abrir" type="button" aria-label="Abrir la invitación de Louis y Fabiola">
+        <canvas class="intro__canvas" id="intro-canvas" width="1280" height="720" aria-hidden="true"></canvas>
+        <img class="intro__frame" id="intro-frame" src="assets/Carta_heros/gemini_generated_video_0ca878b4_007.jpg"
+          alt="Carta sellada con lacre de Louis y Fabiola" width="1280" height="720">
+      </button>
+
+      <p class="intro__nombres">Louis &amp; Fabiola</p>
+      <p class="intro__indicacion">
+        <span class="intro__pulso" aria-hidden="true"></span>
+        Toca la carta para abrirla
+      </p>
+    </div>
+  </div>
+
+
+  <main id="contenido">
+
+    <!-- ═══════════════════════════════════════════════════════
+         1. PORTADA
+         ═══════════════════════════════════════════════════════ -->
+    <section class="portada" id="portada" tabindex="-1" aria-label="Portada de la invitación">
+      <!-- Fotografía de fondo uniforme que cubre toda la portada -->
+      <picture class="portada__fondo">
+        <source media="(min-width: 1024px)" srcset="assets/images/hero-desktop.webp" type="image/webp">
+        <source media="(min-width: 768px)" srcset="assets/images/hero-tablet.webp" type="image/webp">
+        <img class="portada__fondo-img" src="assets/images/hero-mobile.webp" alt="Louis y Fabiola — Nuestra Boda"
+          width="750" height="1200" fetchpriority="high">
+      </picture>
+
+      <!-- Overlay refinado para garantizar contraste y luminosidad equilibrada -->
+      <div class="portada__overlay" aria-hidden="true"></div>
+
+      <!-- Ramas decorativas botánicas en esquinas -->
+      <svg class="rama rama--esquina-sup" aria-hidden="true"><use href="#icono-rama" /></svg>
+      <svg class="rama rama--esquina-inf" aria-hidden="true"><use href="#icono-rama" /></svg>
+
+      <div class="portada__grid">
+        <div class="portada__texto">
+          <p class="antetitulo">¡Nos casamos!</p>
+          <h1 class="portada__nombres">
+            <span>Louis</span>
+            <span class="portada__y">&amp;</span>
+            <span>Fabiola</span>
+          </h1>
+
+          <div class="fecha-clasica" aria-label="Sábado 27 de febrero de 2027, 17:00 horas">
+            <span class="fecha-clasica__mes">Febrero</span>
+            <span class="fecha-clasica__fila">
+              <span class="fecha-clasica__lado">Sábado</span>
+              <span class="fecha-clasica__dia">27</span>
+              <span class="fecha-clasica__lado">17:00 h</span>
+            </span>
+            <span class="fecha-clasica__anio">2027</span>
+          </div>
+
+          <p class="portada__frase">
+            Porque has sido parte de nuestro camino, queremos que también lo seas de nuestro destino.
+            Y queremos compartir este día tan especial contigo.
+          </p>
+        </div>
       </div>
 
-      <div class="countdown__grid" id="countdown-grid" aria-live="polite">
-        <div class="countdown__tarjeta">
-          <div class="countdown__bloque">
+      <button class="portada__scroll" id="scroll-arrow" type="button" aria-label="Desplazarse a la cuenta regresiva">
+        <span>Descubre más</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9" fill="none" stroke="currentColor"
+            stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         2. CUENTA REGRESIVA + AGENDAR
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion seccion--alterno" id="countdown" aria-labelledby="titulo-countdown">
+      <div class="seccion__contenido texto-centrado revelar">
+        <p class="caligrafia caligrafia--grande" id="titulo-countdown">La cuenta atrás ya ha comenzado…</p>
+        <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+
+        <div class="countdown__grid" id="countdown-grid" aria-live="off">
+          <div class="countdown__item">
             <span class="countdown__numero" id="countdown-dias">--</span>
             <span class="countdown__label">Días</span>
           </div>
-        </div>
-        <div class="countdown__tarjeta">
-          <div class="countdown__bloque">
+          <div class="countdown__item">
             <span class="countdown__numero" id="countdown-horas">--</span>
             <span class="countdown__label">Horas</span>
           </div>
-        </div>
-        <div class="countdown__tarjeta">
-          <div class="countdown__bloque">
+          <div class="countdown__item">
             <span class="countdown__numero" id="countdown-minutos">--</span>
-            <span class="countdown__label">Minutos</span>
+            <span class="countdown__label">Min</span>
           </div>
-        </div>
-        <div class="countdown__tarjeta">
-          <div class="countdown__bloque">
+          <div class="countdown__item">
             <span class="countdown__numero" id="countdown-segundos">--</span>
-            <span class="countdown__label">Segundos</span>
+            <span class="countdown__label">Seg</span>
           </div>
         </div>
+
+        <p class="countdown__mensaje-final countdown__mensaje-final--oculto" id="countdown-mensaje-final">
+          ¡Ya nos casamos!
+        </p>
+
+        <p class="countdown__agendar-texto">¡Anota la fecha en tu calendario!</p>
+        <a class="btn btn--contorno" id="btn-calendario" href="#" target="_blank" rel="noopener noreferrer">
+          <svg class="btn__icono" aria-hidden="true"><use href="#icono-calendario" /></svg>
+          Agendar en mi calendario
+        </a>
       </div>
-
-      <!-- Mensaje post-boda (oculto por defecto, visible vía JS) -->
-      <p class="countdown__mensaje-final countdown__mensaje-final--oculto" id="countdown-mensaje-final">
-        ¡Ya nos casamos! 💍
-      </p>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       3. NUESTRA HISTORIA / BIENVENIDA
-       Layout editorial de 2 columnas (foto + texto).
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion historia" id="historia" aria-label="Nuestra historia">
-    <div class="seccion__contenido">
-      <h2 class="titulo-seccion revelar">Nuestra Historia</h2>
-      <div class="linea-ornamento revelar" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
+    <!-- ═══════════════════════════════════════════════════════
+         3. NUESTRA HISTORIA
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion" id="historia" aria-labelledby="titulo-historia">
+      <div class="seccion__contenido">
+        <header class="encabezado revelar">
+          <p class="caligrafia">Después de años juntos…</p>
+          <h2 class="titulo-seccion" id="titulo-historia">Nuestra Historia</h2>
+          <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+        </header>
 
-      <div class="historia__grid">
-        <div class="historia__imagen-container revelar">
-          <!--
-            IMAGEN HISTORIA:
-            ┌──────────────────────────────────────────────────┐
-            │  historia.webp → 800×600px                       │
-            │  Recomendación: foto de la pareja en un          │
-            │  momento informal / significativo.               │
-            └──────────────────────────────────────────────────┘
-          -->
-          <img class="historia__imagen" src="assets/images/historia.webp" alt="Louis y Fabiola — nuestra historia"
-            width="800" height="600" loading="lazy">
-        </div>
-
-        <div class="revelar">
-          <p class="historia__texto">
+        <div class="historia__grid">
+          <figure class="historia__foto revelar">
+            <img src="assets/images/historia.webp" alt="Louis y Fabiola — nuestra historia" width="800" height="600"
+              loading="lazy">
+          </figure>
+          <p class="historia__texto revelar">
             Nos conocimos una tarde de otoño y desde entonces supimos que este momento llegaría. Después de años de
             aventuras juntos, de risas compartidas y sueños construidos, estamos listos para dar el paso más importante
             de nuestras vidas. Nos llena de alegría poder celebrarlo rodeados de las personas que más queremos.
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       4. DETALLES DEL EVENTO
-       Ceremonia + Recepción, cada una con icono decorativo,
-       hora, lugar, dirección, botón "Cómo llegar" y mapa.
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion seccion--alterno detalles" id="detalles" aria-label="Detalles del evento">
-    <div class="seccion__contenido">
-      <h2 class="titulo-seccion revelar">Detalles del Evento</h2>
-      <div class="linea-ornamento revelar" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
+    <!-- ═══════════════════════════════════════════════════════
+         4. CEREMONIA Y RECEPCIÓN
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion seccion--alterno" id="detalles" aria-labelledby="titulo-detalles">
+      <div class="seccion__contenido seccion__contenido--ancho">
+        <header class="encabezado revelar">
+          <p class="caligrafia">El gran día</p>
+          <h2 class="titulo-seccion" id="titulo-detalles">Ceremonia &amp; Recepción</h2>
+          <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+        </header>
 
-      <div class="detalles__grid">
-        <!-- Ceremonia -->
-        <div class="tarjeta tarjeta--evento revelar">
-          <!-- Icono decorativo de iglesia/capilla con halo zafiro -->
-          <div class="tarjeta__icono-envoltorio tarjeta__icono-envoltorio--zafiro" aria-hidden="true">
-            <svg class="tarjeta__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 22H6a1 1 0 0 1-1-1V11l7-9 7 9v10a1 1 0 0 1-1 1z"></path>
-              <path d="M9.5 22v-5a2.5 2.5 0 0 1 5 0v5"></path>
-              <path d="M12 2v4"></path>
-            </svg>
-          </div>
-          <!--
-            IMAGEN CEREMONIA:
-            ┌──────────────────────────────────────┐
-            │  ceremonia.webp → 600×400px           │
-            │  Recomendación: fachada de la         │
-            │  iglesia o interior del templo.       │
-            └──────────────────────────────────────┘
-          -->
-          <img class="tarjeta__imagen" src="assets/images/ceremonia.webp" alt="Posada el pozo — lugar de la ceremonia"
-            width="600" height="400" loading="lazy">
-          <h3 class="tarjeta__titulo">Ceremonia</h3>
-          <p class="tarjeta__hora">17:00 h</p>
-          <p class="tarjeta__lugar">Posada el pozo</p>
-          <p class="tarjeta__direccion">Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo</p>
-          <a href="https://maps.app.goo.gl/gBVBAStTH312Dewk7" target="_blank" rel="noopener noreferrer"
-            class="btn btn--zafiro" id="btn-mapa-ceremonia">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            Cómo Llegar
-          </a>
-          <div class="mapa-container">
-            <iframe title="Mapa de la ceremonia — Posada el pozo"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.5!2d-70.7188355!3d9.1149081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e633d4d5bcad337%3A0x4e42133ce6cf2865!2sPosada%20Finca%20El%20Pozo!5e0!3m2!1ses!2sve!4v1726943000000!5m2!1ses!2sve"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <!-- Recepción -->
-        <div class="tarjeta tarjeta--evento revelar">
-          <!-- Icono decorativo de copa de vino con halo terracota -->
-          <div class="tarjeta__icono-envoltorio tarjeta__icono-envoltorio--terracota" aria-hidden="true">
-            <svg class="tarjeta__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 22h8"></path>
-              <path d="M12 11v11"></path>
-              <path d="M19.5 8c0 2.49-3.36 4.5-7.5 4.5S4.5 10.49 4.5 8"></path>
-              <path d="M4.5 2h15l-1 6H5.5L4.5 2z"></path>
-            </svg>
-          </div>
-          <!--
-            IMAGEN RECEPCIÓN:
-            ┌──────────────────────────────────────┐
-            │  recepcion.webp → 600×400px           │
-            │  Recomendación: vista de la hacienda  │
-            │  o salón de la recepción.             │
-            └──────────────────────────────────────┘
-          -->
-          <img class="tarjeta__imagen" src="assets/images/recepcion.webp"
-            alt="Posada el pozo — lugar de la recepción" width="600" height="400" loading="lazy">
-          <h3 class="tarjeta__titulo">Recepción</h3>
-          <p class="tarjeta__hora">19:00 h</p>
-          <p class="tarjeta__lugar">Posada el pozo</p>
-          <p class="tarjeta__direccion">Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo</p>
-          <a href="https://maps.app.goo.gl/gBVBAStTH312Dewk7" target="_blank" rel="noopener noreferrer"
-            class="btn btn--terracota" id="btn-mapa-recepcion">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            Cómo Llegar
-          </a>
-          <div class="mapa-container">
-            <iframe title="Mapa de la recepción — Posada el pozo"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.5!2d-70.7188355!3d9.1149081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e633d4d5bcad337%3A0x4e42133ce6cf2865!2sPosada%20Finca%20El%20Pozo!5e0!3m2!1ses!2sve!4v1726943000000!5m2!1ses!2sve"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       5. CÓDIGO DE VESTIMENTA
-       Con reserva para los novios y tonos joya para invitados.
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion dresscode" id="dresscode" aria-label="Código de vestimenta">
-    <div class="seccion__contenido">
-      <h2 class="titulo-seccion revelar">Código de Vestimenta</h2>
-      <div class="linea-ornamento revelar" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
-
-      <div class="dresscode__imagen-container revelar">
-        <!--
-          IMAGEN DRESS CODE:
-          ┌──────────────────────────────────────┐
-          │  dresscode.webp → 600×800px           │
-          │  Recomendación: ilustración o foto    │
-          │  de referencia del estilo formal.     │
-          └──────────────────────────────────────┘
-        -->
-        <img class="dresscode__imagen" src="assets/images/dresscode.webp" alt="Código de vestimenta — formal / etiqueta"
-          width="600" height="800" loading="lazy">
-      </div>
-
-      <p class="dresscode__tipo revelar">Formal / Etiqueta Rigurosa</p>
-
-      <!-- Reserva exclusiva de los novios -->
-      <div class="dresscode__reserva revelar">
-        <span class="dresscode__reserva-badge">Reserva Exclusiva de los Novios</span>
-        <p class="dresscode__reserva-texto">
-          Los tonos <strong>blanco, marfil y lino</strong> quedan reservados con cariño exclusivamente para los novios y sus familias de honor.
-        </p>
-      </div>
-
-      <p class="dresscode__sugerencia-titulo revelar">Paleta sugerida para invitados (Tonos Joya & Campestres):</p>
-
-      <!-- Paleta de colores sugerida: 5 tonos joya -->
-      <div class="dresscode__paleta revelar" aria-label="Paleta de colores sugerida para invitados">
-        <div class="dresscode__color">
-          <div class="dresscode__muestra" style="background-color: #C85A32;" title="Terracota vivo (#C85A32)" aria-label="Terracota vivo"></div>
-          <span class="dresscode__color-nombre">Terracota</span>
-        </div>
-        <div class="dresscode__color">
-          <div class="dresscode__muestra" style="background-color: #1B4332;" title="Esmeralda bosque (#1B4332)" aria-label="Verde esmeralda bosque"></div>
-          <span class="dresscode__color-nombre">Esmeralda</span>
-        </div>
-        <div class="dresscode__color">
-          <div class="dresscode__muestra" style="background-color: #1D2D44;" title="Azul zafiro (#1D2D44)" aria-label="Azul zafiro nocturno"></div>
-          <span class="dresscode__color-nombre">Zafiro</span>
-        </div>
-        <div class="dresscode__color">
-          <div class="dresscode__muestra" style="background-color: #6B1D2F;" title="Burdeos formal (#6B1D2F)" aria-label="Burdeos ciruela formal"></div>
-          <span class="dresscode__color-nombre">Burdeos</span>
-        </div>
-        <div class="dresscode__color">
-          <div class="dresscode__muestra" style="background-color: #D49B28;" title="Mostaza cálido (#D49B28)" aria-label="Mostaza cálido u ocre"></div>
-          <span class="dresscode__color-nombre">Mostaza</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       6. NUESTRA GALERÍA
-       Carrusel fluido horizontal + Visor modal continuo.
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion seccion--alterno galeria" id="galeria" aria-label="Galería de fotos">
-    <div class="seccion__contenido seccion__contenido--ancho">
-      <h2 class="titulo-seccion revelar">Nuestra Galería</h2>
-      <div class="linea-ornamento revelar" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
-
-      <!-- Carrusel horizontal con controles flotantes -->
-      <div class="galeria__carrusel-wrapper revelar">
-        <button class="galeria__flecha galeria__flecha--prev" id="carrusel-prev" aria-label="Ver fotografía anterior">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-
-        <div class="galeria__track" id="galeria-carrusel" role="region" aria-label="Carrusel de fotografías de la boda" tabindex="0">
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 1 de 8">
-            <img src="assets/images/galeria-1.webp" alt="Louis y Fabiola — Fotografía 1" width="1536" height="2048" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        <div class="detalles__grid">
+          <article class="tarjeta tarjeta--evento revelar">
+            <div class="tarjeta__foto">
+              <img src="assets/images/ceremonia.webp" alt="Posada el pozo — lugar de la ceremonia" width="600"
+                height="400" loading="lazy">
             </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 2 de 8">
-            <img src="assets/images/galeria-2.webp" alt="Louis y Fabiola — Fotografía 2" width="1536" height="2048" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            <svg class="tarjeta__icono" aria-hidden="true"><use href="#icono-anillos" /></svg>
+            <h3 class="tarjeta__titulo">Ceremonia</h3>
+            <p class="tarjeta__hora">17:00 h</p>
+            <p class="tarjeta__lugar">Posada el pozo</p>
+            <p class="tarjeta__direccion">Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo</p>
+            <a href="https://maps.app.goo.gl/gBVBAStTH312Dewk7" target="_blank" rel="noopener noreferrer"
+              class="btn btn--primario" id="btn-mapa-ceremonia">
+              <svg class="btn__icono" aria-hidden="true"><use href="#icono-ubicacion" /></svg>
+              Ver ubicación
+            </a>
+            <div class="mapa">
+              <iframe title="Mapa de la ceremonia — Posada el pozo"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.5!2d-70.7188355!3d9.1149081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e633d4d5bcad337%3A0x4e42133ce6cf2865!2sPosada%20Finca%20El%20Pozo!5e0!3m2!1ses!2sve!4v1726943000000!5m2!1ses!2sve"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
             </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 3 de 8">
-            <img src="assets/images/galeria-3.webp" alt="Louis y Fabiola — Fotografía 3" width="960" height="1280" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+          </article>
+
+          <article class="tarjeta tarjeta--evento revelar">
+            <div class="tarjeta__foto">
+              <img src="assets/images/recepcion.webp" alt="Posada el pozo — lugar de la recepción" width="600"
+                height="400" loading="lazy">
             </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 4 de 8">
-            <img src="assets/images/galeria-4.webp" alt="Louis y Fabiola — Fotografía 4" width="1165" height="1280" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            <svg class="tarjeta__icono" aria-hidden="true"><use href="#icono-copas" /></svg>
+            <h3 class="tarjeta__titulo">Recepción</h3>
+            <p class="tarjeta__hora">19:00 h</p>
+            <p class="tarjeta__lugar">Posada el pozo</p>
+            <p class="tarjeta__direccion">Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo</p>
+            <a href="https://maps.app.goo.gl/gBVBAStTH312Dewk7" target="_blank" rel="noopener noreferrer"
+              class="btn btn--primario" id="btn-mapa-recepcion">
+              <svg class="btn__icono" aria-hidden="true"><use href="#icono-ubicacion" /></svg>
+              Ver ubicación
+            </a>
+            <div class="mapa">
+              <iframe title="Mapa de la recepción — Posada el pozo"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.5!2d-70.7188355!3d9.1149081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e633d4d5bcad337%3A0x4e42133ce6cf2865!2sPosada%20Finca%20El%20Pozo!5e0!3m2!1ses!2sve!4v1726943000000!5m2!1ses!2sve"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
             </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 5 de 8">
-            <img src="assets/images/galeria-5.webp" alt="Louis y Fabiola — Fotografía 5" width="960" height="1280" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-            </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 6 de 8">
-            <img src="assets/images/galeria-6.webp" alt="Louis y Fabiola — Fotografía 6" width="960" height="1280" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-            </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 7 de 8">
-            <img src="assets/images/galeria-7.webp" alt="Louis y Fabiola — Fotografía 7" width="960" height="1280" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-            </div>
-          </div>
-          <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 8 de 8">
-            <img src="assets/images/galeria-8.webp" alt="Louis y Fabiola — Fotografía 8" width="960" height="1280" loading="lazy">
-            <div class="galeria__slide-badge" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-            </div>
-          </div>
+          </article>
         </div>
-
-        <button class="galeria__flecha galeria__flecha--next" id="carrusel-next" aria-label="Ver fotografía siguiente">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
       </div>
+    </section>
 
-      <!-- Paginación de puntos interactivos -->
-      <div class="galeria__dots" id="carrusel-dots" role="tablist" aria-label="Paginación de fotografías">
-        <button class="galeria__dot galeria__dot--activo" role="tab" aria-selected="true" aria-label="Ir a fotografía 1"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 2"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 3"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 4"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 5"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 6"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 7"></button>
-        <button class="galeria__dot" role="tab" aria-selected="false" aria-label="Ir a fotografía 8"></button>
-      </div>
-    </div>
-  </section>
 
-  <!-- Lightbox (dialog nativo) — centrado a pantalla completa -->
-  <dialog class="lightbox" id="lightbox" aria-label="Visor a pantalla completa">
-    <div class="lightbox__contenido">
-      <!-- Barra superior con contador numérico y botón cerrar -->
-      <div class="lightbox__header">
-        <span class="lightbox__contador" id="lightbox-contador" aria-live="polite">1 / 8</span>
-        <button class="lightbox__cerrar" id="lightbox-cerrar" aria-label="Cerrar visor">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
+    <!-- ═══════════════════════════════════════════════════════
+         5. CÓDIGO DE VESTIMENTA
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion" id="dresscode" aria-labelledby="titulo-dresscode">
+      <div class="seccion__contenido texto-centrado">
+        <header class="encabezado revelar">
+          <p class="caligrafia">Dress code</p>
+          <h2 class="titulo-seccion" id="titulo-dresscode">Código de Vestimenta</h2>
+          <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+        </header>
 
-      <!-- Escenario central del visor con flechas de navegación integradas -->
-      <div class="lightbox__stage">
-        <button class="lightbox__nav lightbox__nav--anterior" id="lightbox-anterior" aria-label="Fotografía anterior">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
+        <div class="tarjeta tarjeta--centrada revelar">
+          <svg class="dresscode__ilustracion" aria-hidden="true"><use href="#icono-vestimenta" /></svg>
+          <p class="dresscode__tipo">Formal / Etiqueta Rigurosa</p>
+          <p class="dresscode__texto">
+            Los siguientes tonos quedan reservados con cariño para los novios.
+            Por favor, <strong>evita usarlos</strong>.
+          </p>
 
-        <div class="lightbox__imagen-contenedor" id="lightbox-swipe-area">
-          <img class="lightbox__imagen" id="lightbox-imagen" src="" alt="Fotografía ampliada">
+          <ul class="dresscode__paleta" aria-label="Colores reservados para los novios">
+            <li class="dresscode__color">
+              <span class="dresscode__muestra dresscode__muestra--blanco" aria-hidden="true"></span>
+              <span class="dresscode__color-nombre">Blanco</span>
+            </li>
+            <li class="dresscode__color">
+              <span class="dresscode__muestra dresscode__muestra--pale-green" aria-hidden="true"></span>
+              <span class="dresscode__color-nombre">Pale Green</span>
+            </li>
+            <li class="dresscode__color">
+              <span class="dresscode__muestra dresscode__muestra--nude-pink" aria-hidden="true"></span>
+              <span class="dresscode__color-nombre">Nude Pink</span>
+            </li>
+            <li class="dresscode__color">
+              <span class="dresscode__muestra dresscode__muestra--dusty-pink" aria-hidden="true"></span>
+              <span class="dresscode__color-nombre">Dusty Pink</span>
+            </li>
+            <li class="dresscode__color">
+              <span class="dresscode__muestra dresscode__muestra--beige" aria-hidden="true"></span>
+              <span class="dresscode__color-nombre">Beige</span>
+            </li>
+          </ul>
         </div>
-
-        <button class="lightbox__nav lightbox__nav--siguiente" id="lightbox-siguiente" aria-label="Fotografía siguiente">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
       </div>
-    </div>
-  </dialog>
+    </section>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       7. MESA DE REGALOS
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion regalos" id="regalos" aria-label="Mesa de regalos">
-    <div class="seccion__contenido regalos__contenido">
-      <h2 class="titulo-seccion revelar">Mesa de Regalos</h2>
-      <div class="linea-ornamento revelar" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
+    <!-- ═══════════════════════════════════════════════════════
+         6. GALERÍA (carrusel + visor)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion seccion--alterno galeria" id="galeria" aria-labelledby="titulo-galeria">
+      <div class="seccion__contenido seccion__contenido--ancho">
+        <header class="encabezado revelar">
+          <p class="caligrafia">Momentos</p>
+          <h2 class="titulo-seccion" id="titulo-galeria">Nuestra Galería</h2>
+          <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+        </header>
 
-      <p class="subtitulo revelar">
-        Lo más importante para nosotros es tu presencia. Sin embargo, si deseas hacernos un obsequio, puedes contribuir
-        a nuestro fondo de luna de miel.
-      </p>
-
-      <div class="regalos__banco revelar">
-        <p class="regalos__dato"><strong>Banco Ejemplo</strong></p>
-        <p class="regalos__dato">CLABE: 0123 4567 8901 2345 67</p>
-        <p class="regalos__dato">Titular: Louis & Fabiola</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       8. CONFIRMACIÓN DE ASISTENCIA (RSVP)
-       Formulario con validación, campo dietético,
-       spinner de carga y retroalimentación elegante.
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion seccion--alterno rsvp" id="rsvp" aria-label="Confirmación de asistencia">
-    <div class="seccion__contenido">
-      <h2 class="titulo-seccion revelar">Confirma tu Asistencia</h2>
-      <div class="linea-ornamento revelar" aria-hidden="true">
-        <svg class="linea-ornamento__icono" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
-      </div>
-      <p class="subtitulo revelar">Por favor confirma antes del 27 de enero de 2027</p>
-
-      <div class="rsvp__contenedor revelar">
-        <form class="rsvp__formulario" id="rsvp-formulario" novalidate>
-          <!-- Nombre -->
-          <div class="rsvp__campo">
-            <label class="rsvp__label" for="rsvp-nombre">Nombre completo *</label>
-            <input class="rsvp__input" type="text" id="rsvp-nombre" name="rsvp-nombre" required autocomplete="name"
-              placeholder="Tu nombre completo">
-            <p class="rsvp__error" data-error-for="rsvp-nombre" aria-live="polite"></p>
-          </div>
-
-          <!-- Email -->
-          <div class="rsvp__campo">
-            <label class="rsvp__label" for="rsvp-email">Correo electrónico *</label>
-            <input class="rsvp__input" type="email" id="rsvp-email" name="rsvp-email" required autocomplete="email"
-              placeholder="tu@email.com">
-            <p class="rsvp__error" data-error-for="rsvp-email" aria-live="polite"></p>
-          </div>
-
-          <!-- Asistencia -->
-          <div class="rsvp__campo">
-            <label class="rsvp__label" for="rsvp-asistencia">¿Asistirás? *</label>
-            <select class="rsvp__select" id="rsvp-asistencia" name="rsvp-asistencia" required>
-              <option value="">Selecciona una opción</option>
-              <option value="si">Sí, ¡ahí estaré!</option>
-              <option value="no">No podré asistir</option>
-            </select>
-            <p class="rsvp__error" data-error-for="rsvp-asistencia" aria-live="polite"></p>
-          </div>
-
-          <!-- Acompañantes -->
-          <div class="rsvp__campo">
-            <label class="rsvp__label" for="rsvp-acompanantes">Número de acompañantes</label>
-            <input class="rsvp__input" type="number" id="rsvp-acompanantes" name="rsvp-acompanantes" min="0" max="10"
-              value="0" autocomplete="off">
-            <p class="rsvp__error" data-error-for="rsvp-acompanantes" aria-live="polite"></p>
-          </div>
-
-          <!-- Preferencias dietéticas -->
-          <div class="rsvp__campo">
-            <label class="rsvp__label" for="rsvp-dieta">Preferencias dietéticas</label>
-            <select class="rsvp__select" id="rsvp-dieta" name="rsvp-dieta">
-              <option value="">Sin restricciones</option>
-              <option value="vegetariano">Vegetariano</option>
-              <option value="vegano">Vegano</option>
-              <option value="sin-gluten">Sin gluten</option>
-              <option value="otro">Otro (especificar en mensaje)</option>
-            </select>
-          </div>
-
-          <!-- Mensaje -->
-          <div class="rsvp__campo">
-            <label class="rsvp__label" for="rsvp-mensaje">Mensaje (opcional)</label>
-            <textarea class="rsvp__textarea" id="rsvp-mensaje" name="rsvp-mensaje" rows="3"
-              placeholder="¿Alguna nota o felicitación?"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn--primario rsvp__submit" id="btn-rsvp-submit">
-            Confirmar Asistencia
+        <div class="galeria__carrusel-wrapper revelar">
+          <button class="galeria__flecha galeria__flecha--prev" id="carrusel-prev" type="button" aria-label="Ver fotografía anterior">
+            <svg aria-hidden="true"><use href="#icono-flecha-izq" /></svg>
           </button>
 
-          <!-- Resultado del envío (éxito o error de red) -->
-          <div class="rsvp__resultado" id="rsvp-resultado" aria-live="polite"></div>
-        </form>
+          <div class="galeria__track" id="galeria-carrusel" role="region" aria-label="Carrusel de fotografías" tabindex="0">
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 1 de 8">
+              <img src="assets/images/galeria-1.webp" alt="Louis y Fabiola — Fotografía 1" width="1536" height="2048" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 2 de 8">
+              <img src="assets/images/galeria-2.webp" alt="Louis y Fabiola — Fotografía 2" width="1536" height="2048" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 3 de 8">
+              <img src="assets/images/galeria-3.webp" alt="Louis y Fabiola — Fotografía 3" width="960" height="1280" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 4 de 8">
+              <img src="assets/images/galeria-4.webp" alt="Louis y Fabiola — Fotografía 4" width="1165" height="1280" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 5 de 8">
+              <img src="assets/images/galeria-5.webp" alt="Louis y Fabiola — Fotografía 5" width="960" height="1280" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 6 de 8">
+              <img src="assets/images/galeria-6.webp" alt="Louis y Fabiola — Fotografía 6" width="960" height="1280" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 7 de 8">
+              <img src="assets/images/galeria-7.webp" alt="Louis y Fabiola — Fotografía 7" width="960" height="1280" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+            <div class="galeria__slide" tabindex="0" role="button" aria-label="Ampliar fotografía 8 de 8">
+              <img src="assets/images/galeria-8.webp" alt="Louis y Fabiola — Fotografía 8" width="960" height="1280" loading="lazy">
+              <span class="galeria__slide-badge" aria-hidden="true"><svg><use href="#icono-lupa" /></svg></span>
+            </div>
+          </div>
+
+          <button class="galeria__flecha galeria__flecha--next" id="carrusel-next" type="button" aria-label="Ver fotografía siguiente">
+            <svg aria-hidden="true"><use href="#icono-flecha-der" /></svg>
+          </button>
+        </div>
+
+        <div class="galeria__dots" id="carrusel-dots" role="tablist" aria-label="Paginación de fotografías">
+          <button class="galeria__dot galeria__dot--activo" type="button" role="tab" aria-selected="true" aria-label="Ir a fotografía 1"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 2"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 3"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 4"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 5"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 6"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 7"></button>
+          <button class="galeria__dot" type="button" role="tab" aria-selected="false" aria-label="Ir a fotografía 8"></button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Visor a pantalla completa (dialog nativo) -->
+    <dialog class="lightbox" id="lightbox" aria-label="Visor a pantalla completa">
+      <div class="lightbox__contenido">
+        <div class="lightbox__header">
+          <span class="lightbox__contador" id="lightbox-contador" aria-live="polite">1 / 8</span>
+          <button class="lightbox__cerrar" id="lightbox-cerrar" type="button" aria-label="Cerrar visor">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" /></svg>
+          </button>
+        </div>
+        <div class="lightbox__stage">
+          <button class="lightbox__nav lightbox__nav--anterior" id="lightbox-anterior" type="button" aria-label="Fotografía anterior">
+            <svg aria-hidden="true"><use href="#icono-flecha-izq" /></svg>
+          </button>
+          <div class="lightbox__imagen-contenedor" id="lightbox-swipe-area">
+            <img class="lightbox__imagen" id="lightbox-imagen" src="" alt="Fotografía ampliada">
+          </div>
+          <button class="lightbox__nav lightbox__nav--siguiente" id="lightbox-siguiente" type="button" aria-label="Fotografía siguiente">
+            <svg aria-hidden="true"><use href="#icono-flecha-der" /></svg>
+          </button>
+        </div>
+      </div>
+    </dialog>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       9. HASHTAG
-       ═══════════════════════════════════════════════════════ -->
-  <section class="seccion hashtag" id="hashtag" aria-label="Hashtag de la boda">
-    <div class="seccion__contenido revelar texto-centrado">
-      <p class="subtitulo">Comparte tus fotos con nuestro hashtag</p>
-      <p class="hashtag__tag">#LouisYFabi2027</p>
-    </div>
-  </section>
+    <!-- ═══════════════════════════════════════════════════════
+         7. MESA DE REGALOS
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion" id="regalos" aria-labelledby="titulo-regalos">
+      <div class="seccion__contenido texto-centrado">
+        <header class="encabezado revelar">
+          <p class="caligrafia">Con cariño</p>
+          <h2 class="titulo-seccion" id="titulo-regalos">Mesa de Regalos</h2>
+          <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+        </header>
+
+        <div class="tarjeta tarjeta--centrada revelar">
+          <svg class="tarjeta__icono" aria-hidden="true"><use href="#icono-regalo" /></svg>
+          <p class="subtitulo">
+            Lo más importante para nosotros es tu presencia. Sin embargo, si deseas hacernos un obsequio, puedes
+            contribuir a nuestro fondo de luna de miel.
+          </p>
+          <div class="regalos__banco">
+            <p class="regalos__dato regalos__dato--destacado">Banco Ejemplo</p>
+            <p class="regalos__dato">CLABE: 0123 4567 8901 2345 67</p>
+            <p class="regalos__dato">Titular: Louis &amp; Fabiola</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         8. CONFIRMACIÓN DE ASISTENCIA (RSVP)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion seccion--alterno" id="rsvp" aria-labelledby="titulo-rsvp">
+      <div class="seccion__contenido">
+        <header class="encabezado revelar">
+          <p class="caligrafia">¿Nos acompañas?</p>
+          <h2 class="titulo-seccion" id="titulo-rsvp">Confirma tu Asistencia</h2>
+          <div class="divisor" aria-hidden="true"><svg class="divisor__rama"><use href="#icono-rama" /></svg></div>
+          <p class="subtitulo">Por favor confirma antes del 27 de enero de 2027</p>
+        </header>
+
+        <!-- Aviso: evento solo para adultos -->
+        <aside class="aviso-ninos revelar" aria-labelledby="titulo-ninos">
+          <svg class="aviso-ninos__icono" aria-hidden="true"><use href="#icono-luna" /></svg>
+          <h3 class="aviso-ninos__titulo" id="titulo-ninos">Niños, dulces sueños</h3>
+          <p class="aviso-ninos__texto">
+            Amamos a sus pequeños, pero hemos pensado esta celebración solo para adultos.
+            ¡Que los peques descansen y tengan dulces sueños!
+          </p>
+        </aside>
+
+        <div class="tarjeta rsvp__contenedor revelar">
+          <form class="rsvp__formulario" id="rsvp-formulario" novalidate>
+            <div class="rsvp__campo">
+              <label class="rsvp__label" for="rsvp-nombre">Nombre completo *</label>
+              <input class="rsvp__input" type="text" id="rsvp-nombre" name="rsvp-nombre" required autocomplete="name"
+                placeholder="Tu nombre completo" aria-describedby="error-rsvp-nombre">
+              <p class="rsvp__error" id="error-rsvp-nombre" data-error-for="rsvp-nombre"></p>
+            </div>
+
+            <div class="rsvp__campo">
+              <label class="rsvp__label" for="rsvp-email">Correo electrónico *</label>
+              <input class="rsvp__input" type="email" id="rsvp-email" name="rsvp-email" required autocomplete="email"
+                placeholder="tu@email.com" aria-describedby="error-rsvp-email">
+              <p class="rsvp__error" id="error-rsvp-email" data-error-for="rsvp-email"></p>
+            </div>
+
+            <div class="rsvp__campo">
+              <label class="rsvp__label" for="rsvp-asistencia">¿Asistirás? *</label>
+              <select class="rsvp__input rsvp__select" id="rsvp-asistencia" name="rsvp-asistencia" required
+                aria-describedby="error-rsvp-asistencia">
+                <option value="">Selecciona una opción</option>
+                <option value="si">Sí, ¡ahí estaré!</option>
+                <option value="no">No podré asistir</option>
+              </select>
+              <p class="rsvp__error" id="error-rsvp-asistencia" data-error-for="rsvp-asistencia"></p>
+            </div>
+
+            <div class="rsvp__campo">
+              <label class="rsvp__label" for="rsvp-mensaje">Mensaje para los novios (opcional)</label>
+              <textarea class="rsvp__input rsvp__textarea" id="rsvp-mensaje" name="rsvp-mensaje" rows="3"
+                placeholder="¿Alguna nota o felicitación?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primario btn--bloque rsvp__submit" id="btn-rsvp-submit">
+              Confirmar asistencia
+            </button>
+
+            <div class="rsvp__resultado" id="rsvp-resultado" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         9. HASHTAG
+         ═══════════════════════════════════════════════════════ -->
+    <section class="seccion hashtag" id="hashtag" aria-label="Hashtag de la boda">
+      <div class="seccion__contenido texto-centrado revelar">
+        <p class="subtitulo">Comparte tus fotos con nuestro hashtag</p>
+        <p class="hashtag__tag">#LouisYFabi2027</p>
+      </div>
+    </section>
+
+  </main>
 
 
   <!-- ═══════════════════════════════════════════════════════
        10. FOOTER
        ═══════════════════════════════════════════════════════ -->
   <footer class="footer" id="footer">
-    <p class="footer__nombres">Louis & Fabiola</p>
-    <p class="footer__fecha">27 . 02 . 2027</p>
-    <div class="linea-ornamento linea-ornamento--footer" aria-hidden="true">
-      <svg class="linea-ornamento__icono linea-ornamento__icono--footer" viewBox="0 0 24 24" fill="currentColor">
-        <path
-          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-      </svg>
-    </div>
-    <p class="footer__texto">Esperamos celebrar juntos este día tan especial</p>
+    <svg class="rama rama--footer" aria-hidden="true"><use href="#icono-rama" /></svg>
+    <p class="footer__despedida">¡Nos vemos pronto!</p>
+    <p class="footer__nombres">Louis &amp; Fabiola</p>
+    <p class="footer__fecha">27 · 02 · 2027</p>
   </footer>
 
 
-  <!-- ═══════════════════════════════════════════════════════
-       SCRIPTS
-       Orden: config (datos) → módulos → main (inicialización)
-       ═══════════════════════════════════════════════════════ -->
+  <!-- Orden: config (datos) → módulos → main (inicialización) -->
   <script src="js/config.js"></script>
+  <script src="js/intro-carta.js"></script>
   <script src="js/countdown.js"></script>
+  <script src="js/calendario.js"></script>
   <script src="js/rsvp.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/scroll-animations.js"></script>

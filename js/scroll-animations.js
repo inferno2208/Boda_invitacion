@@ -1,29 +1,32 @@
 /**
- * scroll-animations.js — Failsafe implementation
+ * scroll-animations.js — Animaciones suaves al hacer scroll (IntersectionObserver)
+ *
+ * Principio: Progressive enhancement
+ * - Si no hay soporte para IntersectionObserver, todo el contenido permanece visible por defecto.
+ * - Solo si está disponible se añade la clase `js-revelar` a <html>.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Asegurar visibilidad inmediata de todo el contenido crítico
-    document.querySelectorAll('section, main, .hero, .card, .container, .revelar').forEach(el => {
-        el.style.opacity = '1';
-        el.style.visibility = 'visible';
-        el.style.transform = 'none';
+function iniciarAnimacionesScroll() {
+  if (!('IntersectionObserver' in window)) return;
+
+  // Activa en CSS los estados iniciales de opacidad y desplazamiento
+  document.documentElement.classList.add('js-revelar');
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
     });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px',
+  });
 
-    // Observer seguro de una sola vía (sin remoción de clases)
-    if ('IntersectionObserver' in window) {
-        const appearObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-revealed');
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Dejar de observar inmediatamente
-                }
-            });
-        }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
+  document.querySelectorAll('.revelar').forEach((el) => {
+    observer.observe(el);
+  });
+}
 
-        document.querySelectorAll('.reveal-on-scroll, .revelar').forEach(el => {
-            appearObserver.observe(el);
-        });
-    }
-});
+window.iniciarAnimacionesScroll = iniciarAnimacionesScroll;

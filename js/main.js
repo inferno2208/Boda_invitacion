@@ -6,15 +6,32 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  iniciarCountdown();
-  iniciarRsvp();
-  iniciarGaleria();
-  iniciarScrollArrow();
+  if (typeof iniciarIntroCarta === 'function') {
+    iniciarIntroCarta();
+  }
+  if (typeof iniciarCountdown === 'function') {
+    iniciarCountdown();
+  }
+  if (typeof iniciarCalendario === 'function') {
+    iniciarCalendario();
+  }
+  if (typeof iniciarRsvp === 'function') {
+    iniciarRsvp();
+  }
+  if (typeof iniciarGaleria === 'function') {
+    iniciarGaleria();
+  }
+  if (typeof iniciarScrollArrow === 'function') {
+    iniciarScrollArrow();
+  }
+  if (typeof iniciarAnimacionesScroll === 'function') {
+    iniciarAnimacionesScroll();
+  }
 });
 
 /**
  * Conecta la flecha de scroll del hero con el desplazamiento suave.
- * Este cambio existe porque la regla 1.1 prohíbe onclick en el HTML.
+ * Separación de responsabilidades: sin eventos onclick inline en HTML.
  */
 function iniciarScrollArrow() {
   const arrow = document.getElementById('scroll-arrow');

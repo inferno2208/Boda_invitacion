@@ -2,11 +2,11 @@
  * rsvp.js — Formulario de confirmación de asistencia
  *
  * - Validación client-side con early returns
+ * - Eliminada la opción de pases/acompañantes según especificación
  * - Función única `enviarConfirmacion(datos)` para el servicio externo
  * - Prevención de doble envío con spinner visual
  * - Manejo explícito de errores (validación vs. red)
  * - URL del servicio desde CONFIG_BODA.rsvp.endpointUrl
- * - Campo de preferencias dietéticas incluido
  */
 
 /**
@@ -53,10 +53,13 @@ function iniciarRsvp() {
         '¡Gracias por confirmar! Nos vemos en la boda 🎉');
       formulario.reset();
     } catch (error) {
-      /* Distinguir error de red vs. otros */
-      const mensaje = error.name === 'TypeError'
-        ? 'Sin conexión a internet. Por favor verifica tu conexión e intenta de nuevo.'
-        : 'No pudimos enviar tu confirmación. Intenta de nuevo o escríbenos directamente.';
+      /* Distinguir error de red vs. configuración de planilla vs. otros */
+      let mensaje = 'No pudimos enviar tu confirmación. Intenta de nuevo o escríbenos directamente.';
+      if (error.name === 'TypeError') {
+        mensaje = 'Sin conexión a internet o el servidor no respondió. Por favor verifica tu conexión e intenta de nuevo.';
+      } else if (error.message && (error.message.includes('Apps Script') || error.message.includes('Google Sheets') || error.message.includes('planilla'))) {
+        mensaje = error.message;
+      }
       mostrarResultado(resultadoEl, 'error', mensaje);
       console.error('[rsvp] Error al enviar:', error);
     } finally {
@@ -71,52 +74,38 @@ function iniciarRsvp() {
 /**
  * Recoge los datos del formulario en un objeto plano.
  * @param {HTMLFormElement} form
- * @returns {{ nombre: string, email: string, asistencia: string, acompanantes: number, dieta: string, mensaje: string }}
+ * @returns {{ nombre: string, email: string, asistencia: string, mensaje: string }}
  */
 function recogerDatos(form) {
   return {
-    nombre: form.elements['rsvp-nombre'].value.trim(),
-    email: form.elements['rsvp-email'].value.trim(),
-    asistencia: form.elements['rsvp-asistencia'].value,
-    acompanantes: parseInt(form.elements['rsvp-acompanantes'].value, 10) || 0,
-    dieta: form.elements['rsvp-dieta'] ? form.elements['rsvp-dieta'].value : '',
-    mensaje: form.elements['rsvp-mensaje'].value.trim(),
+    nombre: form.elements['rsvp-nombre'] ? form.elements['rsvp-nombre'].value.trim() : '',
+    email: form.elements['rsvp-email'] ? form.elements['rsvp-email'].value.trim() : '',
+    asistencia: form.elements['rsvp-asistencia'] ? form.elements['rsvp-asistencia'].value : '',
+    mensaje: form.elements['rsvp-mensaje'] ? form.elements['rsvp-mensaje'].value.trim() : '',
   };
 }
 
 
 /**
  * Valida los datos del formulario.
- * @param {{ nombre: string, email: string, asistencia: string, acompanantes: number }} datos
+ * @param {{ nombre: string, email: string, asistencia: string }} datos
  * @returns {Array<{ campo: string, mensaje: string }>}
  */
 function validarDatos(datos) {
   const errores = [];
-  const maxAcompanantes = CONFIG_BODA.rsvp.maxAcompanantes;
 
   if (!datos.nombre) {
-    errores.push({ campo: 'rsvp-nombre', mensaje: 'Por favor escribe tu nombre' });
+    errores.push({ campo: 'rsvp-nombre', mensaje: 'Por favor escribe tu nombre completo' });
   }
 
   if (!datos.email) {
-    errores.push({ campo: 'rsvp-email', mensaje: 'Por favor escribe tu email' });
+    errores.push({ campo: 'rsvp-email', mensaje: 'Por favor escribe tu correo electrónico' });
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email)) {
-    errores.push({ campo: 'rsvp-email', mensaje: 'El email no parece válido' });
+    errores.push({ campo: 'rsvp-email', mensaje: 'El formato de correo no es válido' });
   }
 
   if (!datos.asistencia) {
-    errores.push({ campo: 'rsvp-asistencia', mensaje: 'Por favor selecciona una opción' });
-  }
-
-  if (datos.acompanantes < 0) {
-    errores.push({ campo: 'rsvp-acompanantes', mensaje: 'El número no puede ser negativo' });
-  }
-
-  if (datos.acompanantes > maxAcompanantes) {
-    errores.push({
-      campo: 'rsvp-acompanantes',
-      mensaje: `Máximo ${maxAcompanantes} acompañantes`,
-    });
+    errores.push({ campo: 'rsvp-asistencia', mensaje: 'Por favor selecciona si asistirás' });
   }
 
   return errores;
@@ -158,17 +147,17 @@ function mostrarErroresValidacion(form, errores) {
 
 
 /**
- * Envía la confirmación al servicio externo.
+ * Envía la confirmación al servicio externo (Google Sheets / Apps Script o similar).
  * ESTA ES LA ÚNICA FUNCIÓN QUE TOCA EL SERVICIO EXTERNO.
  *
  * Si `CONFIG_BODA.rsvp.endpointUrl` está vacío, simula un envío exitoso
  * (modo demo) con un delay de 1.5s.
  *
- * @param {{ nombre: string, email: string, asistencia: string, acompanantes: number, dieta: string, mensaje: string }} datos
+ * @param {{ nombre: string, email: string, asistencia: string, mensaje: string }} datos
  * @returns {Promise<void>}
  */
 async function enviarConfirmacion(datos) {
-  const url = CONFIG_BODA.rsvp.endpointUrl;
+  const url = (CONFIG_BODA.rsvp.endpointUrl || '').trim();
 
   /* Modo demo: sin URL configurada, simulamos envío exitoso */
   if (!url) {
@@ -176,14 +165,75 @@ async function enviarConfirmacion(datos) {
     return new Promise((resolve) => setTimeout(resolve, 1500));
   }
 
-  const response = await fetch(url, {
-    method: CONFIG_BODA.rsvp.metodo,
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(datos),
-  });
+  /* Verificación si se ingresó directamente el enlace de Google Sheets */
+  if (url.includes('docs.google.com/spreadsheets')) {
+    throw new Error(
+      'Para conectar Google Sheets se requiere la URL de la aplicación web de Apps Script (terminada en /exec). Por favor revisa las instrucciones en google-sheets-script.js.'
+    );
+  }
+
+  /* Formatear datos para la fila de Google Sheets */
+  const payload = {
+    fecha: new Date().toLocaleString('es-VE', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }),
+    nombre: datos.nombre,
+    email: datos.email,
+    asistencia: datos.asistencia === 'si' ? 'Sí, asistirá' : 'No asistirá',
+    asistenciaCodigo: datos.asistencia,
+    mensaje: datos.mensaje || '',
+  };
+
+  const esGoogleScript = url.includes('script.google.com');
+
+  /*
+   * Para Google Apps Script usamos text/plain;charset=utf-8 y redirect: 'follow'.
+   * Esto previene el error CORS preflight (OPTIONS 405) y sigue la redirección 302 nativa de Google.
+   */
+  const fetchOptions = esGoogleScript
+    ? {
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
+      }
+    : {
+        method: CONFIG_BODA.rsvp.metodo || 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+
+  const response = await fetch(url, fetchOptions);
+
+  /* Si el navegador devolvió una respuesta opaca (fallback seguro) */
+  if (response.type === 'opaque') {
+    return;
+  }
 
   if (!response.ok) {
     throw new Error(`Error del servidor: ${response.status} ${response.statusText}`);
+  }
+
+  try {
+    const json = await response.json();
+    if (json && json.status === 'error') {
+      throw new Error(json.message || 'Error al registrar la confirmación en la planilla.');
+    }
+  } catch (err) {
+    if (err.message && err.message.includes('Error al registrar')) {
+      throw err;
+    }
   }
 }
 

@@ -4,7 +4,8 @@
   "description": "Invitación de Boda Digital — Louis & Fabiola",
   "scripts": {
     "start": "serve -l 3000 .",
-    "dev": "serve -l 3000 ."
+    "dev": "serve -l 3000 .",
+    "video:hero": "node scripts/crear-video-hero.js"
   },
   "keywords": [
     "wedding",
