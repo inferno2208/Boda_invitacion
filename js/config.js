@@ -23,7 +23,7 @@ const CONFIG_BODA = {
   /* ─── Fecha y hora ──────────────────────────────────────── */
   fecha: {
     /** ISO 8601 — la cuenta regresiva se calcula desde aquí */
-    iso: '2027-02-27T17:00:00',
+    iso: '2027-02-27T16:00:00',
     /** Texto para mostrar en el hero */
     textoCorto: '27 . 02 . 2027',
     /** Texto largo para el footer u otros contextos */
@@ -33,7 +33,7 @@ const CONFIG_BODA = {
   /* ─── Ceremonia ─────────────────────────────────────────── */
   ceremonia: {
     titulo: 'Ceremonia',
-    hora: '17:00 h',
+    hora: '16:00 h',
     lugar: 'Posada el pozo',
     direccion: 'Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo',
     /** URL de Google Maps para el botón "Cómo llegar" */
@@ -45,7 +45,7 @@ const CONFIG_BODA = {
   /* ─── Recepción ─────────────────────────────────────────── */
   recepcion: {
     titulo: 'Recepción',
-    hora: '19:00 h',
+    hora: '18:00 h',
     lugar: 'Posada el pozo',
     direccion: 'Carretera La Puerta - La Lagunita, La Puerta 3106, Trujillo',
     mapaUrl: 'https://maps.app.goo.gl/gBVBAStTH312Dewk7',
@@ -58,11 +58,7 @@ const CONFIG_BODA = {
     heroSubfrase: 'Y queremos compartir este día tan especial contigo',
 
     historiaTitle: 'Nuestra Historia',
-    historiaTexto: `Nos conocimos una tarde de otoño y desde entonces
-supimos que este momento llegaría. Después de años de aventuras juntos,
-de risas compartidas y sueños construidos, estamos listos para dar el
-paso más importante de nuestras vidas. Nos llena de alegría poder
-celebrarlo rodeados de las personas que más queremos.`,
+    historiaTexto: `Nos conocimos una tarde de octubre y nunca imaginamos que este momento llegaría. Después de años de aventuras juntos, de risas compartidas y sueños construidos, entendimos que estamos listos para dar el paso más importante de nuestras vidas. Nos llena de alegría poder celebrarlo rodeados de las personas que más queremos.`,
 
     detallesTitle: 'Detalles del Evento',
 
@@ -75,10 +71,21 @@ celebrarlo rodeados de las personas que más queremos.`,
     regalosTitle: 'Mesa de Regalos',
     regalosTexto: `Lo más importante para nosotros es tu presencia.
 Sin embargo, si deseas hacernos un obsequio, puedes contribuir
-a nuestro fondo de luna de miel.`,
-    regalosBanco: 'Banco Ejemplo',
-    regalosCuenta: 'CLABE: 0123 4567 8901 2345 67',
-    regalosTitular: 'Louis & Fabiola',
+a través de las siguientes opciones:`,
+    regalos: {
+      pagoMovil: {
+        banco: 'Banco Venezuela',
+        ci: '28103046',
+        telefono: '0412-1224435',
+      },
+      zelle: {
+        cuenta: 'Ferretodocabimas2024',
+        nombre: 'Katerin Iriarte',
+      },
+      binance: {
+        id: '364402492',
+      },
+    },
 
     rsvpTitle: 'Confirma tu Asistencia',
     rsvpTexto: 'Por favor confirma antes del 27 de enero de 2027',

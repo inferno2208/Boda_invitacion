@@ -291,6 +291,13 @@ strong {
   width: 100%;
 }
 
+.btn--sm {
+  min-height: 40px;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--texto-xs);
+  letter-spacing: 0.1em;
+}
+
 .btn__icono {
   width: 1.1em;
   height: 1.1em;
@@ -1299,24 +1306,107 @@ dialog.lightbox::backdrop {
 
 
 /* === 12. REGALOS === */
-.regalos__banco {
-  display: inline-block;
-  margin-top: var(--espacio-elemento);
-  padding: 1rem 1.75rem;
-  border-radius: var(--radio-sm);
-  border: 1px dashed var(--color-borde-fuerte);
+.regalos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--espacio-elemento);
+  margin-top: var(--espacio-grupo);
+  align-items: stretch;
 }
 
-.regalos__dato {
-  font-size: var(--texto-sm);
+.regalos__tarjeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(1.75rem, 4vw, 2.25rem) 1.5rem;
+  transition: transform var(--duracion-transicion) var(--easing-suave),
+    box-shadow var(--duracion-transicion) var(--easing-suave),
+    border-color var(--duracion-transicion) var(--easing-suave);
 }
 
-.regalos__dato--destacado {
+.regalos__tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-flotante);
+  border-color: var(--color-borde-fuerte);
+}
+
+.regalos__icono-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radio-pill);
+  background-color: var(--color-fondo-alterno);
+  color: var(--color-primario);
+  margin-bottom: var(--espacio-sm);
+  border: 1px solid var(--color-borde);
+}
+
+.regalos__icono {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.regalos__metodo {
   font-family: var(--fuente-titulos);
+  font-size: var(--texto-lg);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-primario);
+  margin-bottom: var(--espacio-elemento);
+}
+
+.regalos__detalles {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: var(--espacio-elemento);
+  flex-grow: 1;
+}
+
+.regalos__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  background-color: var(--color-fondo);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radio-sm);
+  border: 1px dashed var(--color-borde-fuerte);
+  transition: background-color var(--duracion-rapida) var(--easing-suave);
+}
+
+.regalos__etiqueta {
+  font-size: var(--texto-xs);
+  color: var(--color-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.regalos__valor {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-base);
+  font-weight: 600;
+  color: var(--color-primario-oscuro);
+  letter-spacing: 0.04em;
+  word-break: break-all;
+  user-select: all;
+}
+
+.regalos__btn-copiar {
+  margin-top: auto;
+  width: 100%;
+  max-width: 240px;
+}
+
+.regalos__btn-copiar.copiado {
+  background-color: var(--color-exito);
+  border-color: var(--color-exito);
+  color: var(--color-texto-sobre-acento);
 }
 
 

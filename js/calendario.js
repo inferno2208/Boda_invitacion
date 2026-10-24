@@ -11,7 +11,7 @@
     const btnCalendario = document.getElementById('btn-calendario');
     if (!btnCalendario || typeof CONFIG_BODA === 'undefined') return;
 
-    const fechaIso = CONFIG_BODA.fecha.iso; // '2027-02-27T17:00:00'
+    const fechaIso = CONFIG_BODA.fecha.iso; // '2027-02-27T16:00:00'
     const titulo = `Boda de ${CONFIG_BODA.novios.nombreCompleto}`;
     const lugar = `${CONFIG_BODA.ceremonia.lugar}, ${CONFIG_BODA.ceremonia.direccion}`;
     const detalles = `Celebración del matrimonio de ${CONFIG_BODA.novios.nombreCompleto}. ¡Esperamos celebrar juntos este gran día! Más información: https://inferno2208.github.io/Boda_invitacion/`;

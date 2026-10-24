@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof iniciarGaleria === 'function') {
     iniciarGaleria();
   }
+  if (typeof iniciarRegalos === 'function') {
+    iniciarRegalos();
+  }
   if (typeof iniciarScrollArrow === 'function') {
     iniciarScrollArrow();
   }
